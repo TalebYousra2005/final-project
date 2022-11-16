@@ -1,4 +1,4 @@
-const User = require("../models/user-model");
+const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -40,9 +40,12 @@ exports.login = async (req, res) => {
     if (!(email && password)) {
       return res.status(400).send("All inputs are required");
     }
-
+    
     //* search for user in db
     const user = await User.findOne({ email });
+    if (!user) {
+      return res.status(409).send("User does not exist, please register");
+    }
     if (user && (await bcrypt.compare(password, user.password))) {
       // *if our user exists and the password is correct we createthe token
       const token = jwt.sign({ user_id: user._id }, process.env.TOKEN_KEY);

@@ -7,6 +7,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+const apiRoutes = require("./routes");
 const bodyParser = require("body-parser");
 const PORT = process.env.PORT;
 
@@ -22,7 +23,7 @@ app.use(
   })
 );
 
-app.use("/api");
+app.use("/api", apiRoutes());
 
 app.use((req, res, next) => {
   // Error goes via `next()` method

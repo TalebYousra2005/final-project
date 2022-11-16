@@ -1,18 +1,15 @@
 const { v4: uuidv4 } = require("uuid");
 const multer = require("multer");
 
-const DIR = "./app/public/uploads";
+// const DIR = "./app/public/uploads";
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, DIR);
-  },
   filename: (req, file, cb) => {
     const filename = file.originalname.toLowerCase().split(" ").join("-");
     const savedFilename = uuidv4() + "-" + filename;
     cb(null, savedFilename);
   },
 });
-// multer.diskStorage({});
+multer.diskStorage({});
 var upload = multer({
   storage: storage,
   fileFilter: (req, file, cb) => {
