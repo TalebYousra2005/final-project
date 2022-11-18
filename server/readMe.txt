@@ -1,12 +1,12 @@
-1./ creating all models
+1./ creating all models = done
 
-2./ working the authentification (register / login) functions
+2./ working the authentification (register / login) functions = done
 
-3./ configuring cloudinary
+3./ configuring cloudinary = done
 
-4./ creating the auth middleware
+4./ creating the auth middleware = done
 
-5./ creating the books controllers (4) + test + commit
+5./ creating the books controllers (4) + test + commit = done
 
 6./ creating the users controllers (4) + test + commit
 

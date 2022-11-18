@@ -10,8 +10,9 @@ module.exports = () => {
     upload.single("image"),
     BooksController.addOneBook
   );
-  router.get("/books/:id", checkLogin, BooksController.getOneBookById);
+  router.get("/books/:id", BooksController.getOneBookById);
+  router.get("/books", BooksController.getBooks);
   router.put("/books/edit/:id", checkLogin, BooksController.updateOneBook);
-  router.delete("/books/:id", checkLogin, BooksController.deleteOneBook);
+  router.delete("/books/delete/:id", checkLogin, BooksController.deleteOneBook);
   return router;
 };

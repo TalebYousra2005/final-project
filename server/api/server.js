@@ -26,6 +26,11 @@ app.use(
 app.use("/api", apiRoutes());
 
 app.use((req, res, next) => {
+  console.log("Time: ", Date.now());
+  next();
+});
+
+app.use((req, res, next) => {
   // Error goes via `next()` method
   setImmediate(() => {
     next(new Error("Something went wrong"));

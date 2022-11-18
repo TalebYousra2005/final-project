@@ -1,5 +1,9 @@
 const Book = require("../models/book.model");
 const cloudinary = require("../utils/cloudinary");
+/**
+ * ! something went wrong with the delete one book
+ * ! the edit shows success but does not work
+ */
 
 exports.getOneBookById = async (req, res) => {
   try {
@@ -15,6 +19,16 @@ exports.getOneBookById = async (req, res) => {
   }
 };
 
+exports.getBooks = async (req, res) => {
+  try {
+    const books = await Book.find();
+    res
+      .status(200)
+      .send({ message: "books retreived successfully", data: books });
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+};
 
 exports.addOneBook = async (req, res) => {
   try {
@@ -72,10 +86,10 @@ exports.updateOneBook = async (req, res) => {
           _id: req.params.id,
         },
         {
-          title: title,
-          author: author,
-          pages: pages,
-          price: price,
+          title,
+          author,
+          pages,
+          price,
         },
         { new: true, useFindAndModify: false }
       );
@@ -94,7 +108,7 @@ exports.deleteOneBook = async (req, res) => {
       return res.status(404).send("book not found");
     }
 
-    await cloudinary.uploader.destroy(post.cloudinary_id);
+    await cloudinary.uploader.destroy(book.cloudinary_id);
     await Book.findByIdAndDelete(req.params.id);
     res.status(200).send("Book deleted");
   } catch (err) {

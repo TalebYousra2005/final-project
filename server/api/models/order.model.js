@@ -9,16 +9,12 @@ const mongoose = require("mongoose");
  */
 
 const orderSchema = new mongoose.Schema({
-  seller: {
-    type: mongoose.Types.ObjectId,
-    ref: "User",
-  },
-  buyer: {
-    type: mongoose.Types.ObjectId,
-    ref: "User",
-  },
-  item: {
-    type: mongoose.Types.ObjectId,
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
     ref: "Book",
   },
 });
+
+const Order = mongoose.model("Order", orderSchema);
+
+module.exports = Order;
