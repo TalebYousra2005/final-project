@@ -3,7 +3,7 @@ import { SignInForm } from "../components/login";
 import { SignUpForm } from "../components/register";
 import  cta  from "../images/cta-bg.png";
 
-const LoginRegisterPage = () => {
+const SigninSignupPage = () => {
   return (
     <HomeLayout>
       <div
@@ -23,4 +23,4 @@ const LoginRegisterPage = () => {
   );
 };
 
-export default LoginRegisterPage;
+export default SigninSignupPage;
