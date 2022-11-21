@@ -1,0 +1,7 @@
+.button{
+    background-color: var(--primary-color)!important;
+    margin: 20px 10px!important;
+}
+.form-group{
+    margin: 20px 10px!important;
+}

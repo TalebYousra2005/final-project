@@ -1,0 +1,23 @@
+:root {
+  --primary-color: #fdc800;
+  --secondary-color: #3b1f44;
+  --base-color: #fff3dc;
+}
+body {
+  overflow-x: hidden;
+}
+
+/* * styling the login/register page*/
+.forms-container {
+  background-repeat: no-repeat;
+  background-size: 90% 100%;
+  background-position: right;
+}
+.signin,
+.signup {
+  background-color: #fefefe;
+  border: 2px solid var(--primary-color);
+  border-radius: 5%;
+  margin: 20px 10px !important;
+  padding: 20px 20px !important;
+}

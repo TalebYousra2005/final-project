@@ -23,6 +23,9 @@ const bookSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  subject: {
+    type: String,
+  },
   cloudinary_id: {
     type: String,
   },

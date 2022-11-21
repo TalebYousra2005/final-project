@@ -1,0 +1,9 @@
+.app-name {
+  color: var(--secondary-color) !important;
+}
+.nav {
+  margin-left: 1100px !important;
+}
+/* nav.scrolled {
+  background-color: blue;
+} */

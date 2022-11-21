@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 /**
  * *User model consists of :
+ * *first and last Name
  * *userName
  * *email
  * *password
@@ -11,6 +12,14 @@ const mongoose = require("mongoose");
  * *createdAt
  */
 const userSchema = new mongoose.Schema({
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
   userName: {
     type: String,
     requried: true,
