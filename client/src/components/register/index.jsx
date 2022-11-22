@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signupSchema } from "../../helper/form.validation";
+// import {login}from '../../services/auth.service'
 import "./style.css";
 export const SignUpForm = () => {
   const {
@@ -11,10 +12,10 @@ export const SignUpForm = () => {
   } = useForm({ resolver: yupResolver(signupSchema) });
 
   const handleFormSubmit = (data) => {
-    console.log(data);
-    // login
-    const { email, password } = data;
-    login({ email, password }, dispatch, successNotification);
+    // console.log(data);
+    // // login
+    // const { email, password } = data;
+    // login({ email, password }, dispatch, successNotification);
   };
   return (
     <>
@@ -43,8 +44,8 @@ export const SignUpForm = () => {
         <div className="form-group">
           <label className="form-label">User name</label>
           <input
-            type="email"
-            placeholder="enter your use name"
+            type="type"
+            placeholder="user-name"
             className="form-control"
             {...register("userName")}
           />
@@ -54,7 +55,7 @@ export const SignUpForm = () => {
           <label className="form-label">Email</label>
           <input
             type="email"
-            placeholder="enter your email"
+            placeholder="you@example.com"
             className="form-control"
             {...register("email")}
           />
@@ -63,7 +64,7 @@ export const SignUpForm = () => {
         <div className="form-group">
           <label className="form-label">Password</label>
           <input
-            type="password"
+            type="........."
             placeholder="enter your password"
             className="form-control"
             {...register("password")}
@@ -78,8 +79,8 @@ export const SignUpForm = () => {
             className="form-control"
             {...register("studyFeild")}
           /> */}
-          <div className="custom-select" {...register("studyFeild")}>
-            <select>
+          <div className="custom-select" >
+            <select {...register("studyFeild")}>
               <option value={0}>Select an option:</option>
               <option value={1}>Medcine</option>
               <option value={2}>Pharmacy</option>

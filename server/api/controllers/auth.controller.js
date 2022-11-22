@@ -29,7 +29,7 @@ exports.register = async (req, res) => {
     });
     res.status(201).send(newUser);
   } catch (err) {
-    res.status(err.status || 500).send(err.message || "something went wrong");
+    res.status(err.status || 500).send(err.message || "something went wrong while registration");
   }
 };
 

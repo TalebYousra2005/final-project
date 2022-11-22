@@ -1,7 +1,9 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import {useDispatch} from 'react-redux'
 import { signinSchema } from "../../helper/form.validation";
+import {signin} from '../../services/auth.service'
 import "./style.css";
 export const SignInForm = () => {
   const {
@@ -9,12 +11,12 @@ export const SignInForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(signinSchema) });
-
+  const dispatch = useDispatch()
   const handleFormSubmit = (data) => {
     console.log(data);
     // login
     const { email, password } = data;
-    login({ email, password }, dispatch, successNotification);
+    signin({ email, password }, dispatch, successNotification);
   };
 
   return (
@@ -41,7 +43,7 @@ export const SignInForm = () => {
           />
           <p className="text-danger">{errors.password?.message}</p>
         </div>
-        <button className="btn button">login</button>
+        <button className="btn button">Sign in</button>
       </form>
     </>
   );
