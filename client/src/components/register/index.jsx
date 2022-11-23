@@ -2,6 +2,9 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signupSchema } from "../../helper/form.validation";
+import { successNotification,errorNotification } from "../../helper/notifications";
+import { signup } from "../../services/auth.service";
+import { useDispatch } from "react-redux";
 // import {login}from '../../services/auth.service'
 import "./style.css";
 export const SignUpForm = () => {
@@ -10,12 +13,17 @@ export const SignUpForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(signupSchema) });
-
+  const dispatch = useDispatch();
   const handleFormSubmit = (data) => {
-    // console.log(data);
-    // // login
-    // const { email, password } = data;
-    // login({ email, password }, dispatch, successNotification);
+    console.log(data);
+    // login
+    const { firstName, lastName, userName, email, password, studyFeild } = data;
+    signup(
+      { firstName, lastName, userName, email, password, studyFeild },
+      dispatch,
+      successNotification,
+      errorNotification
+    );
   };
   return (
     <>
@@ -64,8 +72,8 @@ export const SignUpForm = () => {
         <div className="form-group">
           <label className="form-label">Password</label>
           <input
-            type="........."
-            placeholder="enter your password"
+            type="password"
+            placeholder=". . . . . . . ."
             className="form-control"
             {...register("password")}
           />
@@ -79,7 +87,7 @@ export const SignUpForm = () => {
             className="form-control"
             {...register("studyFeild")}
           /> */}
-          <div className="custom-select" >
+          <div className="custom-select">
             <select {...register("studyFeild")}>
               <option value={0}>Select an option:</option>
               <option value={1}>Medcine</option>

@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {useDispatch} from 'react-redux'
 import { signinSchema } from "../../helper/form.validation";
 import {signin} from '../../services/auth.service'
+import {successNotification,errorNotification}from '../../helper/notifications'
 import "./style.css";
 export const SignInForm = () => {
   const {
@@ -16,7 +17,7 @@ export const SignInForm = () => {
     console.log(data);
     // login
     const { email, password } = data;
-    signin({ email, password }, dispatch, successNotification);
+    signin({ email, password }, dispatch, successNotification,errorNotification);
   };
 
   return (
@@ -27,7 +28,7 @@ export const SignInForm = () => {
           <label className="form-label">Email</label>
           <input
             type="email"
-            placeholder="enter your email"
+            placeholder="you@example.com"
             className="form-control"
             {...register("email")}
           />
@@ -37,7 +38,7 @@ export const SignInForm = () => {
           <label className="form-label">Password</label>
           <input
             type="password"
-            placeholder="enter your password"
+            placeholder=". . . . . . . ."
             className="form-control"
             {...register("password")}
           />
