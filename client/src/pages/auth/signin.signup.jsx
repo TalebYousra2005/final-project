@@ -1,7 +1,7 @@
-import { HomeLayout } from "../components/layouts/home";
-import { SignInForm } from "../components/login";
-import { SignUpForm } from "../components/register";
-import  cta  from "../images/cta-bg.png";
+import { HomeLayout } from "../../components/layouts/home";
+import { SignInForm } from "../../components/login";
+import { SignUpForm } from "../../components/register";
+import  cta  from "../../images/cta-bg.png";
 
 const SigninSignupPage = () => {
   return (

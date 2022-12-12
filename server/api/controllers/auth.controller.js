@@ -52,9 +52,9 @@ exports.signin = async (req, res) => {
     if (user && (await bcrypt.compare(password, user.password))) {
       // *if our user exists and the password is correct we createthe token
       const token = jwt.sign({ user_id: user._id }, process.env.TOKEN_KEY);
+      user.token = token;
       res
         .status(200)
-        .cookie("token", token)
         .send({ message: "signed in in successfully", data: user });
     } else {
       return res.status(409).send({ message: "incorerct email or password" });

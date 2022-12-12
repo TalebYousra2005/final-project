@@ -1,0 +1,10 @@
+.button {
+    background-color: var(--primary-color);
+    margin: 20px 10px !important;
+  }
+  .title {
+    color: var(--secondary-color) !important;
+  }
+  .form-group {
+    margin: 20px 10px !important;
+  }

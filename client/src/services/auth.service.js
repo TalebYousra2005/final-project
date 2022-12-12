@@ -1,5 +1,7 @@
+import { useParams } from "react-router-dom";
 import http from "../http.commun";
 import { signinUser, signupUser } from "../redux/reducers/auth";
+import { addCurrentUser } from "../redux/reducers/currentUser";
 export const signin = (
   { email, password },
   dispatch,
@@ -10,17 +12,19 @@ export const signin = (
   http
     .post("/auth/signin", { email, password })
     .then((res) => {
-      // console.log(res);
+      // console.log(res.data+"this is the response data");
       if (res.status === 200) {
         const data = res.data.data;
-        console.log(data);
         // const id = data._id
-        sessionStorage.setItem("token", JSON.stringify(data));
+        localStorage.setItem("token",data.token);
+        
         // console.log(`hello${sessionStorage.setItem("token", JSON.stringify(data.token))}`)
         dispatch(signinUser({ data }));
+        dispatch(addCurrentUser({data}))
         successNotification(res.data.message);
+        const id = useParams().id
         setTimeout(() => {
-          // window.location = `/profile/${id}`;
+          window.location = `/user/${id}`;
         }, 3000);
       } else if (res.status === 404) {
         console.log("res.message 404");
@@ -32,8 +36,8 @@ export const signin = (
     })
     .catch((err) => {
       // const data = res.data;
-      console.log(err.response.data.message);
-      errorNotification(err.response.data.message);
+      // console.log(err.response);
+      errorNotification(err.response);
     });
 };
 
@@ -60,13 +64,13 @@ export const signup = (
         const data = res.data.data;
         console.log(data);
         // const id = data._id
-        // sessionStorage.setItem("token", JSON.stringify(data));
+        localStorage.setItem("token", JSON(data));
         // console.log(`hello${sessionStorage.setItem("token", JSON.stringify(data.token))}`)
         dispatch(signupUser({ data }));
         successNotification(res.data.message);
-        // setTimeout(() => {
-        //   window.location = `/profile/${id}`;
-        // }, 3000);
+        setTimeout(() => {
+          window.location = `/user/${id}`;
+        }, 3000);
       } else if (res.status === 409) {
         console.log("res.message 409");
         errorNotification(`gggg${res.data.message}`);

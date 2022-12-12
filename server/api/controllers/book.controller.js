@@ -35,7 +35,7 @@ exports.addOneBook = async (req, res) => {
     const url = req.protocol + "://" + req.get("host"); // => "http://localhost:4000"
     // ! the link for the post image is "http://localhost:4000/uploads/name"
     const { title, author, pages, price } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     // saving image to cloudinary
     const result = await cloudinary.uploader.upload(req.file.path);
     const book = new Book({

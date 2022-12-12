@@ -1,12 +1,17 @@
 :root {
-  --primary-color: #fdc800;
   --secondary-color: #3b1f44;
+  --primary-color: #fdc800;
   --base-color: #fff3dc;
 }
 body {
   overflow-x: hidden;
+  padding: 0px;
+  margin: 0px;
 }
 
+h1{
+  color: var(--secondary-color);
+}
 /* * styling the login/register page*/
 .forms-container {
   background-repeat: no-repeat;

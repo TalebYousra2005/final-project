@@ -1,9 +1,12 @@
+const User = require("./user.model");
 const mongoose = require("mongoose");
 /**
  * * the book must have
  * *title
  * *author
  * *price
+ * *subject
+ * *type:book
  * *image
  * *cloudinary_id
  * *createdAt
@@ -26,11 +29,20 @@ const bookSchema = new mongoose.Schema({
   subject: {
     type: String,
   },
+  type: {
+    type: String,
+    default: "book",
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   cloudinary_id: {
     type: String,
   },
   createdAt: {
     type: Date,
+    default: Date.now(),
   },
 });
 

@@ -1,17 +1,19 @@
 import { Link } from "react-router-dom";
+import { Compare } from "../../helper/compareUrl";
+import { useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import "./style.css";
+import currentUser from "../../redux/reducers/currentUser";
 export const Navbar = () => {
-  // var myNav = document.getElementById("nav");
-  // window.onscroll = function () {
-  //   if (window.scrollY >= 2) {
-  //     myNav.classList.add("navbar-dark");
-  //     myNav.classList.remove("navbar-light");
-  //   } else {
-  //     myNav.classList.add("navbar-light");
-  //     myNav.classList.remove("navbar-dark");
-  //   }
-  // };
+  
+  const currentUser = localStorage.getItem("token");
+  console.log(currentUser);
+  // !const dispatch = useDispatch();
+  // !const currentUser = dispatch(currentUser);
+  // !console.log(currentUser)
+  const path = useLocation();
   return (
-    <nav className="navbar navbar-expand-lg bg-white navbar-light sticky-top p-0 px-3 px-lg-5">
+    <nav className="navbar navbar-expand-lg sticky-top p-0 px-3 px-lg-5">
       <Link to="/" className="navbar-brand d-flex align-items-center">
         <h2 className="m-0 app-name">
           <img
@@ -20,7 +22,7 @@ export const Navbar = () => {
             alt="."
             style={{ width: 45 }}
           />
-          My app name
+          UNI Shop
         </h2>
       </Link>
       <button
@@ -33,22 +35,62 @@ export const Navbar = () => {
       </button>
       <div className="collapse navbar-collapse" id="navbarCollapse">
         <div className="navbar-nav nav mx-5 py-3 py-lg-0">
-          <Link to="/" className="nav-item nav-link active">
-            Home
-          </Link>
-          <Link to="/cources" className="nav-item nav-link">
-            Cources
-          </Link>
-          <Link to="/books" className="nav-item nav-link">
-            Books
-          </Link>
-          <Link to="/auth/sign" className="nav-item nav-link">
-            Sign in/up
-          </Link>
+          <p
+            className={
+              Compare("/", path.pathname) ? "mb-0 p-3 active" : "mb-0 p-3"
+            }
+          >
+            <Link to="/" className="nav-item nav-link ">
+              Home
+            </Link>
+          </p>
+          <p
+            className={
+              Compare("/cources", path.pathname)
+                ? "mb-0 p-3 active"
+                : "mb-0 p-3"
+            }
+          >
+            <Link to="/cources" className="nav-item nav-link">
+              Cources
+            </Link>
+          </p>
+          <p
+            className={
+              Compare("/books", path.pathname) ? "mb-0 p-3 active" : "mb-0 p-3"
+            }
+          >
+            <Link to="/books" className="nav-item nav-link">
+              Books
+            </Link>
+          </p>
+          <p
+            className={
+              Compare("/contact", path.pathname)
+                ? "mb-0 p-3 active"
+                : "mb-0 p-3"
+            }
+          >
+            <Link to="/contact" className="nav-item nav-link">
+              Contact
+            </Link>
+          </p>
 
-          <Link to="/contact" className="nav-item nav-link">
-            Contact
-          </Link>
+          {currentUser ? (
+            <p>{currentUser.firstName}</p>
+          ) : (
+            <p
+              className={
+                Compare("/auth/sign", path.pathname)
+                  ? "mb-0 p-3 active"
+                  : "mb-0 p-3"
+              }
+            >
+              <Link to="/auth/sign" className="nav-item nav-link">
+                Sign in/up
+              </Link>
+            </p>
+          )}
         </div>
       </div>
     </nav>
