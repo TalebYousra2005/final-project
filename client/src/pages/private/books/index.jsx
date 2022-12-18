@@ -5,11 +5,11 @@ import { ErrorFetch } from "../../../components/error-fetch";
 import { useEffect } from "react";
 const UserBooksPage = () => {
   const params = useParams();
-  
+
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
   const { data, loading, error } = useFetch(`/users/${params.id}`);
-  
+
   // console.log(data);
   return (
     <div className="container-fluid">

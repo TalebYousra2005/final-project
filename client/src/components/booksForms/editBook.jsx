@@ -1,3 +1,6 @@
+//* this is the form to handle updating a book 
+
+
 import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -35,7 +38,6 @@ export const EditBookForm = () => {
     reset({ ...defaultValues });
   }, [data]);
 
-  // login
   const { title, author, price, subject, image } = data;
   updateOneBook(
     { id, title, author, price, subject, image },
