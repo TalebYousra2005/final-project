@@ -4,10 +4,13 @@ const jwt = require("jsonwebtoken");
 
 exports.signup = async (req, res) => {
   try {
-    const { firstName, lastName, userName,email, password, studyFeild } = req.body;
+    const { firstName, lastName, userName, email, password, studyFeild } =
+      req.body;
 
     // *server form validation
-    if (!(firstName && lastName && userName && email && password && studyFeild)) {
+    if (
+      !(firstName && lastName && userName && email && password && studyFeild)
+    ) {
       return res.status(400).send("all inputs are required");
     }
     //* checking if the user exists
@@ -28,7 +31,12 @@ exports.signup = async (req, res) => {
       password: hashedPassword,
       studyFeild,
     });
-    res.status(201).send({message:'successfully signed up, now please signin',data:newUser});
+    res
+      .status(201)
+      .send({
+        message: "successfully signed up, now please signin",
+        data: newUser,
+      });
   } catch (err) {
     res
       .status(err.status || 500)
@@ -62,7 +70,7 @@ exports.signin = async (req, res) => {
   } catch (err) {
     res
       .status(err.status || 500)
-      .send(err.message || "something went wrong while login");
+      .send(err.message || "something went wrong while signing in ");
   }
 };
 

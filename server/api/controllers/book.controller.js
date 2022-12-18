@@ -34,8 +34,9 @@ exports.addOneBook = async (req, res) => {
   try {
     const url = req.protocol + "://" + req.get("host"); // => "http://localhost:4000"
     // ! the link for the post image is "http://localhost:4000/uploads/name"
-    const { title, author, pages, price } = req.body;
-    // console.log(req.body);
+    const { title, author, pages, price, ownerId } = req.body;
+    // console.log(ownerId);
+     // console.log(req.body);
     // saving image to cloudinary
     const result = await cloudinary.uploader.upload(req.file.path);
     const book = new Book({
@@ -45,6 +46,7 @@ exports.addOneBook = async (req, res) => {
       price,
       image: result.secure_url,
       cloudinary_id: result.public_id,
+      ownerId: ownerId,
     });
     // saving our new created instances
     const savedBook = await book.save();

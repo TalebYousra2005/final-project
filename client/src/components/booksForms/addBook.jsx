@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { BookSchema } from "../../helper/form.validation";
 import { addOneBook } from "../../services/books.service";
 import {
@@ -9,8 +9,10 @@ import {
   errorNotification,
 } from "../../helper/notifications";
 import "./style.css";
+// import currentUser from "../../redux/reducers/currentUser";
 
 export const AddBookForm = () => {
+  const { currentUser } = useSelector((state) => state.user);
   const {
     register,
     handleSubmit,
@@ -22,7 +24,7 @@ export const AddBookForm = () => {
     // login
     const { title, author } = data;
     addOneBook(
-      { title, author, price, subject, image },
+      { title, author, price, subject, image, ownerId: currentUser._id },
       dispatch,
       successNotification,
       errorNotification

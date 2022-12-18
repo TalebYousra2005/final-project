@@ -34,8 +34,7 @@ const bookSchema = new mongoose.Schema({
     default: "book",
   },
   owner: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    type: String,
   },
   cloudinary_id: {
     type: String,

@@ -1,7 +1,14 @@
 import { useParams } from "react-router-dom";
+import {
+  successNotification,
+  errorNotification,
+} from "../helper/notifications";
 import http from "../http.commun";
-import { signinUser, signupUser } from "../redux/reducers/auth";
-import { addCurrentUser } from "../redux/reducers/currentUser";
+import { signinUser, signupUser, signoutUser } from "../redux/reducers/auth";
+import {
+  addCurrentUser,
+  removeCurrentUser,
+} from "../redux/reducers/currentUser";
 export const signin = (
   { email, password },
   dispatch,
@@ -12,17 +19,18 @@ export const signin = (
   http
     .post("/auth/signin", { email, password })
     .then((res) => {
-      // console.log(res.data+"this is the response data");
       if (res.status === 200) {
         const data = res.data.data;
         // const id = data._id
-        localStorage.setItem("token",data.token);
-        
-        // console.log(`hello${sessionStorage.setItem("token", JSON.stringify(data.token))}`)
-        dispatch(signinUser({ data }));
-        dispatch(addCurrentUser({data}))
+        localStorage.setItem("token", JSON.stringify(data));
+        localStorage.setItem("id", data._id);
+        // console.log(`hello${localStorage.setItem("token", JSON.stringify(data.token))}`)
+        dispatch(signinUser(data));
+        dispatch(addCurrentUser(data));
         successNotification(res.data.message);
-        const id = useParams().id
+        const id = data._id;
+        console.log(id);
+
         setTimeout(() => {
           window.location = `/user/${id}`;
         }, 3000);
@@ -65,9 +73,10 @@ export const signup = (
         console.log(data);
         // const id = data._id
         localStorage.setItem("token", JSON(data));
-        // console.log(`hello${sessionStorage.setItem("token", JSON.stringify(data.token))}`)
+        // console.log(`hello${localStorage.setItem("token", JSON.stringify(data.token))}`)
         dispatch(signupUser({ data }));
         successNotification(res.data.message);
+        const id = data._id;
         setTimeout(() => {
           window.location = `/user/${id}`;
         }, 3000);
@@ -81,4 +90,16 @@ export const signup = (
       console.log(`${err}hello`);
       errorNotification(err.response.data.message);
     });
+};
+
+export const signout = (dispatch) => {
+  if (localStorage.getItem("token")) {
+    localStorage.removeItem("token");
+    dispatch(signoutUser());
+    dispatch(removeCurrentUser());
+    successNotification("Successfuly signd out");
+    setTimeout(() => {
+      window.location = "/";
+    }, [3000]);
+  }
 };

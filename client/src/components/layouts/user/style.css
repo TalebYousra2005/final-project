@@ -1,0 +1,33 @@
+.dashboard-sidebar {
+  min-height: 100vh !important;
+}
+
+.active {
+  background-color: var(--primary-color);
+}
+
+.sidebar-links p {
+  cursor: pointer;
+}
+.sidebar {
+  background-color: var(--base-color);
+}
+.sidebar-links p:hover {
+  background-color: var(--primary-color);
+}
+.sidebar-links p a {
+  text-decoration: none;
+  color: var(--secondary-color);
+  padding-left: 5px;
+}
+.sidebar-links p button {
+  border: none;
+  background: none;
+  color: var(--secondary-color);
+}
+.sidebar-header {
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
+  border-bottom: 2px solid var(--secondary-color);
+  margin: 0px;
+}

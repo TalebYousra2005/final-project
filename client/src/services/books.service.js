@@ -5,7 +5,7 @@ import {
   errorNotification,
 } from "../helper/notifications";
 
-export const addOneBook = ({ title, author, price, subject, image }) => {
+export const addOneBook = ({ title, author, price, subject, image, ownerId }) => {
   // send our data as form ddta
   var formData = new FormData();
   formData.append("title", title);
@@ -13,6 +13,7 @@ export const addOneBook = ({ title, author, price, subject, image }) => {
   formData.append("price", price);
   formData.append("subject", subject);
   formData.append("image", image[0]);
+  formData.append("ownerId", ownerId);
   http
     .post("/books/create", formData, {
       header: {

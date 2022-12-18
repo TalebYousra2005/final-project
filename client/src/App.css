@@ -7,22 +7,58 @@ body {
   overflow-x: hidden;
   padding: 0px;
   margin: 0px;
+  font-size: larger!important;
 }
 
-h1{
+h1 {
   color: var(--secondary-color);
 }
 /* * styling the login/register page*/
-.forms-container {
+.form-container {
   background-repeat: no-repeat;
   background-size: 90% 100%;
   background-position: right;
 }
-.signin,
+
 .signup {
   background-color: #fefefe;
-  border: 2px solid var(--primary-color);
+  border: 4px solid var(--primary-color);
   border-radius: 5%;
   margin: 20px 10px !important;
   padding: 20px 20px !important;
+}
+
+/** styling the home page*/
+.hero-section {
+  padding: 300px 0px !important;
+  height: 600px;
+  background-size: 500px 600px;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+.hero-title {
+  color: var(--secondary-color);
+}
+
+.about-section {
+  margin: 200px 30px;
+  padding-bottom: 30px;
+}
+.about-content {
+  padding: 20px 40px;
+  border-bottom: 3px solid var(--secondary-color);
+}
+
+/* *styling the contact page*/
+.contact {
+  margin: 30px;
+}
+textarea {
+  height: 350px;
+}
+.email,
+.message {
+  border: 2px solid var(--secondary-color) !important;
+  border-radius: 20%;
+  background-color: var(--base-color)!important;
 }

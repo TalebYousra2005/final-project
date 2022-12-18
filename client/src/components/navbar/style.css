@@ -11,3 +11,11 @@
   color: var(--secondary-color)!important;
   background-color: var(--base-color) !important;
 }
+.nav-active{
+  background-color: var(--primary-color)!important;
+}
+.nav-p-link link:hover{
+  
+    background-color: var(--primary-color)!important;
+  
+}

@@ -1,19 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const currentUserSlice = createSlice({
-  name: "currentUser",
+  name: "user",
   initialState: {
-    statusCode: "",
-    message: "",
+    currentUser: null,
   },
   reducers: {
     addCurrentUser: (state, { payload }) => {
-      state.statusCode = payload.statusCode;
-      state.message = payload.message;
+      state.currentUser=payload;
     },
     removeCurrentUser: (state) => {
-      state.statusCode = "";
-      state.message = "";
+      state.currentUser=null
     },
   },
 });

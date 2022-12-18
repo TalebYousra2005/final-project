@@ -1,7 +1,11 @@
-.button{
-    background-color: var(--primary-color)!important;
-    margin: 20px 10px!important;
+.button {
+  background-color: var(--secondary-color) !important;
+  color: var(--base-color) !important;
+  margin: 20px 10px !important;
 }
-.form-group{
-    margin: 20px 10px!important;
+.form-group {
+  margin: 20px 10px !important;
 }
+/* form{
+    border: 3px solid var(--secondary-color)!important;
+} */

@@ -1,13 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Compare } from "../../helper/compareUrl";
 import { useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./style.css";
 import currentUser from "../../redux/reducers/currentUser";
 export const Navbar = () => {
-  
-  const currentUser = localStorage.getItem("token");
-  console.log(currentUser);
+  const navigate = useNavigate();
+  const par = useParams();
+  console.log(par);
+  const id = localStorage.getItem("id");
+  console.log(`this is the params ${id}`);
+  const { currentUser } = useSelector((state) => state.user);
+  // console.log(currentUser);
   // !const dispatch = useDispatch();
   // !const currentUser = dispatch(currentUser);
   // !console.log(currentUser)
@@ -37,7 +41,9 @@ export const Navbar = () => {
         <div className="navbar-nav nav mx-5 py-3 py-lg-0">
           <p
             className={
-              Compare("/", path.pathname) ? "mb-0 p-3 active" : "mb-0 p-3"
+              Compare("/", path.pathname)
+                ? "mb-0 p-3 nav-active nav-p-link"
+                : "mb-0 p-3"
             }
           >
             <Link to="/" className="nav-item nav-link ">
@@ -47,7 +53,7 @@ export const Navbar = () => {
           <p
             className={
               Compare("/cources", path.pathname)
-                ? "mb-0 p-3 active"
+                ? "mb-0 p-3 nav-active nav-p-link"
                 : "mb-0 p-3"
             }
           >
@@ -57,7 +63,9 @@ export const Navbar = () => {
           </p>
           <p
             className={
-              Compare("/books", path.pathname) ? "mb-0 p-3 active" : "mb-0 p-3"
+              Compare("/books", path.pathname)
+                ? "mb-0 p-3 nav-active nav-p-link"
+                : "mb-0 p-3"
             }
           >
             <Link to="/books" className="nav-item nav-link">
@@ -67,7 +75,7 @@ export const Navbar = () => {
           <p
             className={
               Compare("/contact", path.pathname)
-                ? "mb-0 p-3 active"
+                ? "mb-0 p-3 nav-active nav-p-link"
                 : "mb-0 p-3"
             }
           >
@@ -77,12 +85,25 @@ export const Navbar = () => {
           </p>
 
           {currentUser ? (
-            <p>{currentUser.firstName}</p>
+            <p
+              className={
+                Compare(`/user/`, path.pathname)
+                  ? "mb-0 p-3 nav-active nav-p-link "
+                  : "mb-0 p-3 nav-item nav-link "
+              }
+            >
+              <Link
+                className="nav-item nav-link"
+                to={`/user/${currentUser._id}`}
+              >
+                Profile
+              </Link>
+            </p>
           ) : (
             <p
               className={
                 Compare("/auth/sign", path.pathname)
-                  ? "mb-0 p-3 active"
+                  ? "mb-0 p-3 nav-active nav-p-link"
                   : "mb-0 p-3"
               }
             >

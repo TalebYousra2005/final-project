@@ -19,7 +19,7 @@ const BooksPage = () => {
             <div className="grid-container row mt-5 p-4">
               {/* {loading && <Loading />} */}
               {error && (
-                <ErrorFetch message="error while fetching posts list" />
+                <ErrorFetch message="error while fetching books list" />
               )}
               {data && data.length === 0 && <h1>Not data to show</h1>}
               {!error &&
