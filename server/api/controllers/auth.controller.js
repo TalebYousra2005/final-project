@@ -83,7 +83,7 @@ exports.signin = async (req, res) => {
     }
   } catch (err) {
     res
-      .status(err.status || 500)
+      .status( 500)
       .send(err.message || "something went wrong while signing in ");
   }
 };

@@ -35,18 +35,12 @@ export const signin = (
         setTimeout(() => {
           window.location = `/user/${id}`;
         }, 3000);
-      } else if (res.status === 404) {
-        // console.log("res.message 404");
-        errorNotification(res.data.message);
-      } else if (res.status === 409) {
-        // console.log("res.message 409");
-        errorNotification(res.data.message);
       }
     })
     .catch((err) => {
       // const data = res.data;
       // console.log(err.response);
-      errorNotification(err.response);
+      errorNotification(err.response?.data.message);
     });
 };
 

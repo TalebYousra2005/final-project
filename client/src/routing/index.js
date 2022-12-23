@@ -8,7 +8,8 @@ import AddBookPage from "../pages/private/books/addBook";
 import EditBookPage from "../pages/private/books/editBook";
 import UserHomePage from "../pages/private";
 import UserBooksPage from "../pages/private/books";
-import NotFoundPage from "../pages/404.jsx"
+import NotFoundPage from "../pages/404.jsx";
+import UserOrdersPage from "../pages/private/orders";
 
 export const routes = [
   { id: 1, path: "/", element: HomePage, isPrivate: false, children: [] },
@@ -50,6 +51,7 @@ export const routes = [
       { id: 2, path: "books", element: UserBooksPage },
       { id: 3, path: "books/create", element: AddBookPage },
       { id: 4, path: "books/edit/:id", element: EditBookPage },
+      { id: 5, path: "orders", element: UserOrdersPage },
     ],
   },
   {

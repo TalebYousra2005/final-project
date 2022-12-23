@@ -66,6 +66,7 @@ export const updateOneBook = ({ id, title, author, price, subject, image }) => {
     })
     .catch((err) => {
       errorNotification(err.message);
+      console.log(err);
     });
 };
 

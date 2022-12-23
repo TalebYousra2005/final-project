@@ -44,12 +44,6 @@ export const UserPageLayout = () => {
                 </Link>
               </p>
 
-              <p className="mb-0 p-3">
-                <Link to={`/`} className="d-block">
-                  Home page
-                </Link>
-              </p>
-
               <p
                 className={
                   Compare(`/user/${currentUser._id}/books`, path.pathname)
@@ -59,6 +53,24 @@ export const UserPageLayout = () => {
               >
                 <Link to={`/user/${currentUser._id}/books`} className="d-block">
                   My Books
+                </Link>
+              </p>
+
+              <p
+                className={
+                  Compare(`/user/${currentUser._id}/orders`, path.pathname)
+                    ? "mb-0 p-3 active"
+                    : "mb-0 p-3"
+                }
+              >
+                <Link to={`/user/${currentUser._id}/orders`} className="d-block">
+                  My Orders
+                </Link>
+              </p>
+
+              <p className="mb-0 p-3">
+                <Link to={`/`} className="d-block">
+                  Home page
                 </Link>
               </p>
 

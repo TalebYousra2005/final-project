@@ -1,4 +1,5 @@
-import moment from "moment-js"
+import moment from "moment"
+
 export const formatDate = (date) => {
-  return moment(date).format("LLL");
+  return moment(date).format('LLLL');
 };

@@ -9,9 +9,14 @@ const mongoose = require("mongoose");
  */
 
 const orderSchema = new mongoose.Schema({
-  product: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Book",
+  productId: {
+    type: String,
+  },
+  clientId: {
+    type: String,
+  },
+  sellerId: {
+    type: String,
   },
 });
 

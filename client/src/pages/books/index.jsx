@@ -23,17 +23,9 @@ const BooksPage = () => {
     <HomeLayout>
       <div className="container-fluid  product-container mt-3">
         <div className="row p-4">
-          {/* <div className="col-md-3 sideBar-container">
-            <div className="sideBar"></div>
-          </div> */}
-
           <div className="col-md-12 content-area">
             <h1 className="text-center">Our Books</h1>
             <div className="grid-container row mt-5 p-4">
-              {/* {loading && <Loading />} */}
-              {/* {error && (
-                <ErrorFetch message="error while fetching books list" />
-              )} */}
               {books && books.length === 0 && <h1>Not data to show</h1>}
               {books &&
                 books.map((el) => {

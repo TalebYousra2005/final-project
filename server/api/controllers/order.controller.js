@@ -2,18 +2,16 @@ const Order = require("../models/order.model");
 const Book = require("../models/book.model");
 exports.addOneOrder = async (req, res) => {
   try {
-    const product = Book.findById(req.body.productId);
-    if (!product) {
-      return res.status(404).send({ message: "book not found" });
-    }
-    //! check if product exists
+    const { productId, clientId, sellerId } = req.body;
     const order = new Order({
-      product: req.body.productId,
+      productId,
+      clientId,
+      sellerId,
     });
     const savedOrder = await order.save();
     res
       .status(201)
-      .send({ message: "order created successfully", data: savedOrder });
+      .send({ message: "order placed successfully", data: savedOrder });
   } catch (err) {
     res
       .status(err.status || 500)
@@ -32,6 +30,18 @@ exports.getOrders = async (req, res) => {
   }
 };
 
+exports.getSellerOrders = async (req, res) => {
+  try {
+    const userOrders = Order.find({ sellerId: req.user.user_id });
+    res
+      .status(200)
+      .send({ message: "orders retreived successfuly", data: userOrders });
+  } catch (err) {
+    res
+      .status(500 || err.status)
+      .send(err.message || "something went wrong while gitting user orders");
+  }
+};
 exports.deleteOrder = async (req, res) => {
   try {
     await Order.deleteOne({ _id: req.params.id });

@@ -1,16 +1,16 @@
-import useFetch from "../../../hooks/useFetch";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { ErrorFetch } from "../../../components/error-fetch";
 import { useEffect, useState } from "react";
 import { formatDate } from "../../../helper/formateDate";
 import httpCommun from "../../../http.commun";
+import { deleteOneBook } from "../../../services/books.service";
 
 const UserBooksPage = () => {
   const [books, setBooks] = useState(null);
   const params = useParams();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
+
   useEffect(() => {
     httpCommun
       .get(`/books/user/${currentUser._id}`)
@@ -25,26 +25,30 @@ const UserBooksPage = () => {
   console.log(books);
   return (
     <div className="container-fluid">
-      <h2>My books</h2>
+      <h1 className="text-center">My books</h1>
       <div className="row mt-5">
         <div className="col-md-2">
           <button
             className="btn btn-warning col-md-12"
             onClick={() => navigate(`/user/${params.id}/books/create`)}
           >
-            Add
+            <span className="material-symbols-outlined">post_add</span>
           </button>
         </div>
       </div>
       <div className="data-container mt-5">
         {/* {loading && <Loading />} */}
         {/* {error && <ErrorFetch message="Error while fetchin contacts " />} */}
+
         {books && (
-          <table className="table table-bordered">
+          <table className="table table-bordered table-hover border-4 rounded">
             <thead>
               <tr>
                 <th>title</th>
-                <th>body</th>
+                <th>author</th>
+                {/* <th>author</th> */}
+                <th>price</th>
+                <th>subject</th>
                 <th>CreatedAt</th>
                 <th>Action</th>
               </tr>
@@ -55,22 +59,33 @@ const UserBooksPage = () => {
                   return (
                     <tr key={item._id}>
                       <td>{item.title}</td>
-                      <td>{item.body}</td>
-                      <td>{formatDate(item.createAt)}</td>
+                      <td>{item.author}</td>
+                      <td>{item.price}</td>
+                      <td>{item.subject}</td>
+                      <td>{formatDate(item.createdAt)}</td>
                       <td>
                         <button
-                          className="btn btn-danger"
-                          onClick={() => deleteOnePost(item._id)}
+                          className="btn btn-danger mx-2"
+                          onClick={() => deleteOneBook(item._id)}
                         >
-                          x
-                        </button>{" "}
-                        /
-                        <a
-                          className="btn btn-success"
-                          href={`/user/${params.id}/books/edit/${item._id}`}
+                          {/* <FontAwesomeIcon icon="fa-duotone fa-trash-can-list" /> */}
+                          <span className="material-symbols-outlined">
+                            delete
+                          </span>
+                        </button>
+
+                        <button
+                          className="btn btn-success ml-2"
+                          onClick={() =>
+                            navigate(
+                              `/user/${params.id}/books/edit/${item._id}`
+                            )
+                          }
                         >
-                          v
-                        </a>
+                          <span className="material-symbols-outlined">
+                            edit_square
+                          </span>
+                        </button>
                       </td>
                     </tr>
                   );

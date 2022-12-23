@@ -14,10 +14,11 @@ import {
   errorNotification,
 } from "../../helper/notifications";
 import "./style.css";
-
 export const EditBookForm = () => {
   const [book, setBook] = useState(null);
   const id = useParams().id;
+  const dispatch = useDispatch();
+
   useEffect(() => {
     httpCommun
       .get(`/books/${id}`)
