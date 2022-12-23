@@ -8,18 +8,29 @@ import {
   successNotification,
   errorNotification,
 } from "../../helper/notifications";
+import httpCommun from "../../http.commun";
+import { useParams } from "react-router-dom";
+import { useState } from "react";
 
 export const UserProfileForm = () => {
-  const { currentUser } = useSelector((state) => state.user);
-  // console.log(currentUser)
+  const [user, setUser] = useState(null);
+  const id = useParams().id
+  useEffect(() => {
+    httpCommun.get(`users/${id}`).then((res) => {
+      if (res.status === 200) {
+        setUser(res.data?.data);
+      }
+    });
+  });
+  // console.log(user)
   useEffect(() => {
     let defaultValues = {};
-    defaultValues.title = currentUser ? currentUser.firstName : "";
-    defaultValues.author = currentUser ? currentUser.lastName : "";
-    defaultValues.price = currentUser ? currentUser.userName : "";
-    defaultValues.subject = currentUser ? currentUser.email : "";
-    defaultValues.subject = currentUser ? currentUser.contact : "";
-    defaultValues.subject = currentUser ? currentUser.studyFeild : "";
+    defaultValues.firstName = user ? user.firstName : "";
+    defaultValues.lastName = user ? user.lastName : "";
+    defaultValues.userName = user ? user.userName : "";
+    defaultValues.email = user ? user.email : "";
+    defaultValues.contact = user ? user.contact : "";
+    defaultValues.studyFeild = user ? user.studyFeild : "";
 
     reset({ ...defaultValues });
   }, []);
@@ -37,7 +48,7 @@ export const UserProfileForm = () => {
     const { firstName, lastName, userName, password, contact, studyFeild } =
       data;
     updateOneUser(
-      currentUser._id,
+      user._id,
       firstName,
       lastName,
       userName,
@@ -50,8 +61,8 @@ export const UserProfileForm = () => {
   return (
     <div className="container">
       <h3>
-        Welcome {currentUser.lastName}, here your account information, feel free
-        to update
+        Welcome {user?.lastName}, here your account information, feel free to
+        update
       </h3>
       <div className="row ">
         <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -61,7 +72,7 @@ export const UserProfileForm = () => {
               type="text"
               className="form-control "
               placeholder="Doe"
-              // value={currentUser.firstName}
+              // value={user.firstName}
               {...register("firstName")}
             />
             <h6 className="text-danger mt-2 fw-normal">
@@ -75,7 +86,7 @@ export const UserProfileForm = () => {
               type="text"
               className="form-control "
               placeholder="John"
-              // value={currentUser.lastName}
+              // value={user.lastName}
               {...register("lastName")}
             />
             <h6 className="text-danger mt-2 fw-normal">
@@ -89,7 +100,7 @@ export const UserProfileForm = () => {
               type="text"
               className="form-control "
               placeholder="userName"
-              // value={currentUser.userName}
+              // value={user.userName}
               {...register("userName")}
             />
             <h6 className="text-danger mt-2 fw-normal">
@@ -103,7 +114,7 @@ export const UserProfileForm = () => {
               type="email"
               className="form-control "
               placeholder="you@example.com"
-              // value={currentUser.email}
+              // value={user.email}
               {...register("email")}
             />
             <h6 className="text-danger mt-2 fw-normal">
@@ -117,7 +128,7 @@ export const UserProfileForm = () => {
               type="text"
               className="form-control "
               placeholder="+213 0. .. .. .. .."
-              // value={currentUser.contact}
+              // value={user.contact}
               {...register("contact")}
             />
             <h6 className="text-danger mt-2 fw-normal">
@@ -130,7 +141,7 @@ export const UserProfileForm = () => {
             {/* <input
               type="text"
               className="form-control "
-              // value={currentUser.contact}
+              // value={user.contact}
               {...register("contact")}
             > */}
             <div className="custom-select form-control ">
