@@ -1,9 +1,6 @@
 const Book = require("../models/book.model");
 const cloudinary = require("../utils/cloudinary");
-/**
- * ! something went wrong with the delete one book
- * ! the edit shows success but does not work
- */
+
 
 exports.getOneBookById = async (req, res) => {
   try {
@@ -100,7 +97,9 @@ exports.updateOneBook = async (req, res) => {
       res.status(200).json({ message: "book updted with success", data: book });
     }
   } catch (err) {
-    res.status(err.status || 500).send(err.message || "something went wrong");
+    res
+      .status(err.status || 500)
+      .send(err.message || "something went wrong while updating a book");
   }
 };
 
@@ -116,7 +115,9 @@ exports.deleteOneBook = async (req, res) => {
     await Book.findByIdAndDelete(req.params.id);
     res.status(200).send("Book deleted");
   } catch (err) {
-    res.status(err.status || 500).send(err.message || "something went wrong");
+    res
+      .status(err.status || 500)
+      .send(err.message || "something went wrong while updating book");
   }
 };
 

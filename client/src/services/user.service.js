@@ -5,7 +5,7 @@ import {
   errorNotification,
 } from "../helper/notifications";
 
-export const updateOneUser = ({
+export const updateOneUser = (
   id,
   firstName,
   lastName,
@@ -13,26 +13,31 @@ export const updateOneUser = ({
   password,
   contact,
   studyFeild,
-}) => {
+  dispatch
+) => {
   let formData = new FormData();
-  formData.append("firstName", firstName);
-  formData.append("lastName", lastName);
-  formData.append("userName", userName);
-  formData.append("password",password );
-  formData.append("contact",contact );
-  formData.append("studyFeild", studyFeild);
+  // formData.append("firstName", firstName);
+  // formData.append("lastName", lastName);
+  // formData.append("userName", userName);
+  // formData.append("password", password);
+  // formData.append("contact", contact);
+  // formData.append("studyFeild", studyFeild);
   // formData.append("image", image ? image[0] : null);
   http
-    .put(`/users/${id}`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+    .put(`/users/${id}`, {
+      id,
+      firstName,
+      lastName,
+      userName,
+      password,
+      contact,
+      studyFeild,
     })
     .then((res) => {
       if (res.status === 200) {
         successNotification("account info updated successfully");
         // setTimeout(() => {
-        //   window.location = "/admin/posts";
+        //   window.location.reload();
         // }, 3000);
       }
     })

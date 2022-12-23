@@ -77,15 +77,12 @@ export const signup = (
           window.location = `/`;
           successNotification("please login to your account");
         }, 3000);
-      } else if (res.status === 409) {
-        // console.log("res.message 409");
-        errorNotification(`gggg${res.data.message}`);
-      }
+      } 
     })
     .catch((err) => {
       // const data = res.data;
       // console.log(`${err}hello`);
-      errorNotification(err.response.data.message);
+      errorNotification(err.response?.data.message);
     });
 };
 

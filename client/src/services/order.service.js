@@ -4,7 +4,7 @@ import {
 } from "../helper/notifications";
 import http from "../http.commun";
 
-export const addOrder = ({ productId, clientId, sellerId }) => {
+export const addOrder = ( productId, clientId, sellerId ) => {
   var formData = new FormData();
   formData.append("productId", productId);
   formData.append("clientId", clientId);

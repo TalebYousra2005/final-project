@@ -24,46 +24,6 @@ const UserOrdersPage = () => {
   console.log(orders);
 
   return (
-    // <div className="container-fluid">
-    //   <h2>My orders</h2>
-    //   {/* <div className="row mt-5">
-    //     <div className="col-md-2">
-    //       <button
-    //         className="btn btn-warning col-md-12"
-    //         onClick={() => navigate(`/user/${params.id}/orders/create`)}
-    //       >
-    //         <span className="material-symbols-outlined">post_add</span>
-    //       </button>
-    //     </div>
-    //   </div> */}
-    //   <div className="data-container mt-5">
-
-    //           {orders &&
-    //             orders.map((item) => {
-    //               return(
-    //                 <div className="container-fluid  product-container mt-3">
-    //     <div className="row p-4">
-    //       <div className="col-md-12 content-area">
-    //         <h1 className="text-center">Our orders</h1>
-    //         <div className="grid-container row mt-5 p-4">
-    //           {orders && orders.length === 0 && <h1>Not data to show</h1>}
-    //           {orders &&
-    //             orders.map((el) => {
-    //               return (
-    //                 <div className="g-col-md-4" key={el._id}>
-    //                   <ProductCard item={el} />
-    //                 </div>
-    //               );
-    //             })}
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    //               )
-    //             })}
-
-    //   </div>
-    // </div>
     <div className="container mt-3">
       <div className="row p-4">
         <div className="col-md-12 content-area">

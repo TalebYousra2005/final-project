@@ -33,6 +33,7 @@ exports.getOneUserById = async (req, res) => {
 
 exports.updateOneUser = async (req, res) => {
   try {
+    console.log(req.body)
     const user = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
       new: true,
       useFindAndModify: false,

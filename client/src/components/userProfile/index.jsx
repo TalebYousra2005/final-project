@@ -4,11 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import { signupSchema } from "../../helper/form.validation";
 import { updateOneUser } from "../../services/user.service";
-import { successNotification,errorNotification } from "../../helper/notifications";
+import {
+  successNotification,
+  errorNotification,
+} from "../../helper/notifications";
 
 export const UserProfileForm = () => {
   const { currentUser } = useSelector((state) => state.user);
-// console.log(currentUser)
+  // console.log(currentUser)
   useEffect(() => {
     let defaultValues = {};
     defaultValues.title = currentUser ? currentUser.firstName : "";
@@ -34,18 +37,14 @@ export const UserProfileForm = () => {
     const { firstName, lastName, userName, password, contact, studyFeild } =
       data;
     updateOneUser(
-      {
-        id: currentUser._id,
-        firstName,
-        lastName,
-        userName,
-        password,
-        contact,
-        studyFeild,
-      },
-      dispatch,
-      successNotification,
-      errorNotification
+      currentUser._id,
+      firstName,
+      lastName,
+      userName,
+      password,
+      contact,
+      studyFeild,
+      dispatch
     );
   };
   return (

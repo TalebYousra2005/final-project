@@ -49,13 +49,13 @@ export const Navbar = () => {
           </p>
           <p
             className={
-              Compare("/cources", path.pathname)
+              Compare("/documents", path.pathname)
                 ? "mb-0 p-3 nav-active nav-p-link"
                 : "mb-0 p-3"
             }
           >
-            <Link to="/cources" className="nav-item nav-link">
-              Cources
+            <Link to="/documents" className="nav-item nav-link">
+              Documents
             </Link>
           </p>
           <p

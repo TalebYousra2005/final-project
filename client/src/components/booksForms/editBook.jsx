@@ -65,19 +65,13 @@ export const EditBookForm = () => {
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="form-group">
           <label className="form-label">Title</label>
-          <input
-            type="title"
-            // value={book.title}
-            className="form-control"
-            {...register("title")}
-          />
+          <input type="title" className="form-control" {...register("title")} />
           <p className="text-danger">{errors.title?.message}</p>
         </div>
         <div className="form-group">
           <label className="form-label">Author</label>
           <input
             type="author"
-            // value={book.author}
             className="form-control"
             {...register("author")}
           />
@@ -86,12 +80,7 @@ export const EditBookForm = () => {
 
         <div className="form-group">
           <label className="form-label">Price</label>
-          <input
-            type="price"
-            // value={book.price}
-            className="form-control"
-            {...register("price")}
-          />
+          <input type="price" className="form-control" {...register("price")} />
           <p className="text-danger">{errors.price?.message}</p>
         </div>
 
@@ -99,7 +88,6 @@ export const EditBookForm = () => {
           <label className="form-label">Subject</label>
           <input
             type="subject"
-            // value={book.subject}
             className="form-control"
             {...register("subject")}
           />
