@@ -1,10 +1,23 @@
-import { HomeLayout } from "../layouts/home";
-
-// ! owner id : f636c126a382a20869602ffbf
-
+import { useState,useEffect } from "react";
+import { useSelector } from "react-redux";
+import httpCommun from "../../http.commun";
 export const ProductDetails = ({ item }) => {
-  const { _id, title, author, price, image,owner } = item;
-  console.log(item);
+  const { _id, title, author, price, image, ownerId } = item;
+  const {currentUser}=useSelector((state)=>state.user)
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    httpCommun
+      .get(`/users/${ownerId}`)
+      .then((res) => {
+        if (res.status === 200) {
+          setUser(res.data?.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  console.log(user)
+
   return (
     <div className="container">
       <div className="row pt-5">
@@ -15,11 +28,7 @@ export const ProductDetails = ({ item }) => {
         </div>
         <div className="col-md-5">
           <br />
-          <p>
-            {/* publisher : {owner.userName} */}
-            {/* //todo add publiser name
-             */}
-          </p>
+          {/* <p>publisher : {user.userName}</p> */}
 
           <p>price : {price}</p>
           <p>{author && <p>author : {author}</p>}</p>
@@ -36,8 +45,8 @@ export const ProductDetails = ({ item }) => {
         <div className="col-md-6">
           <h1>Product details</h1>
           <p>
-            Title :{title} <br />
-            Publisher :{" "}
+            Title : {title} <br />
+            {/* Publisher : {user.firstName} {user.lastName} */}
           </p>
         </div>
       </div>

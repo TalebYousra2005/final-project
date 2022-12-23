@@ -1,6 +1,9 @@
 .grid-container {
-  display: grid !important;
-  grid-template-columns: 300px 300px 300px;
+  display: grid!important;
+	grid-template-columns: 350px 350px 350px;
+	grid-template-rows: 380px 380px 380px;
+	column-gap: 60px;
+	row-gap: 90px;
 }
 
 .product-container{

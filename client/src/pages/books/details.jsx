@@ -1,20 +1,31 @@
+import { useState,useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { HomeLayout } from "../../components/layouts/home";
+import httpCommun from "../../http.commun";
 import { ProductDetails } from "../../components/product-details";
 import useFetch from "../../hooks/useFetch";
 import "./style.css";
 
 const BookDetailsPage = () => {
   const params = useParams();
-  const { data, loading, error } = useFetch(`/books/${params.id}`);
-  // console.log(data?.data);
+  const [book, setBook] = useState(null);
+
+  useEffect(() => {
+    httpCommun
+      .get(`/books/${params.id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          setBook(res.data.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <HomeLayout>
       <div className="container-fluid product-container">
-      {data && data.length === 0 && <h1>Not data to show</h1>}
-      {data && !error && <ProductDetails item={data?.data} />}
+        {book && <ProductDetails item={book} />}
       </div>
-      
     </HomeLayout>
   );
 };

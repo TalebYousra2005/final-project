@@ -6,8 +6,7 @@ import library from "../images/hero-section.png";
 import { useSelector } from "react-redux";
 const HomePage = () => {
   const navigate = useNavigate();
-  const id = localStorage.getItem("id");
-  const currentUser = useSelector((state) => state.user);
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <HomeLayout>
       <div className="hero">
@@ -24,7 +23,7 @@ const HomePage = () => {
                   <br />
                   Get your book, study hard and ace your exams
                 </p>
-                {!currentUser && (
+                {/* {!currentUser && (
                   <button
                     type="button"
                     className="btn btn-warning m-3"
@@ -43,6 +42,31 @@ const HomePage = () => {
                   >
                     Login
                   </button>
+                )} */}
+
+                {currentUser ? (
+                  <span></span>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      className="btn btn-warning m-3"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      // {
+                      //   localStorage.getItem("token")
+                      //     ? navigate(`user/${id}`)
+                      //     :
+                      // }
+                      onClick={() => {
+                        if (currentUser) {
+                          navigate(`user/${currentUser._id}`);
+                        }
+                      }}
+                    >
+                      Login
+                    </button>
+                  </>
                 )}
               </div>
             </div>
@@ -66,8 +90,8 @@ const HomePage = () => {
                   <button
                     className="btn btn-warning m-3"
                     onClick={() => {
-                      if (localStorage.getItem("token")) {
-                        navigate(`user/${id}`);
+                      if (currentUser) {
+                        navigate(`user/${currentUser._id}`);
                       } else {
                         navigate("/auth/sign");
                       }

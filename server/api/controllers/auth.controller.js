@@ -4,12 +4,27 @@ const jwt = require("jsonwebtoken");
 
 exports.signup = async (req, res) => {
   try {
-    const { firstName, lastName, userName, email, password, studyFeild } =
-      req.body;
+    const {
+      firstName,
+      lastName,
+      userName,
+      email,
+      password,
+      contact,
+      studyFeild,
+    } = req.body;
 
     // *server form validation
     if (
-      !(firstName && lastName && userName && email && password && studyFeild)
+      !(
+        firstName &&
+        lastName &&
+        userName &&
+        email &&
+        password &&
+        contact &&
+        studyFeild
+      )
     ) {
       return res.status(400).send("all inputs are required");
     }
@@ -29,14 +44,13 @@ exports.signup = async (req, res) => {
       userName,
       email,
       password: hashedPassword,
+      contact,
       studyFeild,
     });
-    res
-      .status(201)
-      .send({
-        message: "successfully signed up, now please signin",
-        data: newUser,
-      });
+    res.status(201).send({
+      message: "successfully signed up, now please signin",
+      data: newUser,
+    });
   } catch (err) {
     res
       .status(err.status || 500)
@@ -58,12 +72,12 @@ exports.signin = async (req, res) => {
       return res.status(404).send({ message: "User not found, please signup" });
     }
     if (user && (await bcrypt.compare(password, user.password))) {
-      // *if our user exists and the password is correct we createthe token
+      // *if our user exists and the password is correct we create the token
       const token = jwt.sign({ user_id: user._id }, process.env.TOKEN_KEY);
-      user.token = token;
+      // user.token = token;
       res
         .status(200)
-        .send({ message: "signed in in successfully", data: user });
+        .send({ message: "signed in in successfully", data: user, token });
     } else {
       return res.status(409).send({ message: "incorerct email or password" });
     }

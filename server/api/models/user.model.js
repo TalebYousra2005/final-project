@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-/**
+/* *
  * *User model consists of :
  * *first and last Name
  * *userName
@@ -31,6 +31,9 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
+  },
+  contact: {
+    type: Number,
   },
   studyFeild: {
     type: String,

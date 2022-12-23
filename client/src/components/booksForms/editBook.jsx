@@ -1,5 +1,4 @@
-//* this is the form to handle updating a book 
-
+//* this is the form to handle updating a book
 
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -8,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { BookSchema } from "../../helper/form.validation";
 import { useParams } from "react-router-dom";
 import { updateOneBook } from "../../services/books.service";
+import { useEffect, useState } from "react";
+import httpCommun from "../../http.commun";
 import {
   successNotification,
   errorNotification,
@@ -15,9 +16,19 @@ import {
 import "./style.css";
 
 export const EditBookForm = () => {
+  const [book, setBook] = useState(null);
   const id = useParams().id;
-  const { data, loading, error } = useFetch(`/books/${id}`);
-
+  useEffect(() => {
+    httpCommun
+      .get(`/books/${id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          setBook(res.data.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  console.log(book);
   const {
     register,
     handleSubmit,
@@ -30,30 +41,32 @@ export const EditBookForm = () => {
   // setting form default values
   useEffect(() => {
     let defaultValues = {};
-    defaultValues.title = data ? data.title : "";
-    defaultValues.author = data ? data.author : "";
-    defaultValues.price = data ? data.price : "";
-    defaultValues.subject = data ? data.subject : "";
+    defaultValues.title = book ? book.title : "";
+    defaultValues.author = book ? book.author : "";
+    defaultValues.price = book ? book.price : "";
+    defaultValues.subject = book ? book.subject : "";
 
     reset({ ...defaultValues });
-  }, [data]);
+  }, [book]);
+  const handleFormSubmit = (data) => {
+    const { title, author, price, subject, image } = data;
+    updateOneBook(
+      { id, title, author, price, subject, image },
+      dispatch,
+      successNotification,
+      errorNotification
+    );
+  };
 
-  const { title, author, price, subject, image } = data;
-  updateOneBook(
-    { id, title, author, price, subject, image },
-    dispatch,
-    successNotification,
-    errorNotification
-  );
   return (
     <>
-      <h1 className="text-center title">Add one book to sell</h1>
+      <h1 className="text-center title">Edit your book</h1>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="form-group">
           <label className="form-label">Title</label>
           <input
             type="title"
-            placeholder=" . . . . . . . "
+            // value={book.title}
             className="form-control"
             {...register("title")}
           />
@@ -63,35 +76,35 @@ export const EditBookForm = () => {
           <label className="form-label">Author</label>
           <input
             type="author"
-            placeholder=". . . . . . . ."
+            // value={book.author}
             className="form-control"
             {...register("author")}
           />
           <p className="text-danger">{errors.author?.message}</p>
         </div>
-  
+
         <div className="form-group">
           <label className="form-label">Price</label>
           <input
             type="price"
-            placeholder=". . . . . . . ."
+            // value={book.price}
             className="form-control"
             {...register("price")}
           />
           <p className="text-danger">{errors.price?.message}</p>
         </div>
-  
+
         <div className="form-group">
           <label className="form-label">Subject</label>
           <input
             type="subject"
-            placeholder=". . . . . . . ."
+            // value={book.subject}
             className="form-control"
             {...register("subject")}
           />
           <p className="text-danger">{errors.subject?.message}</p>
         </div>
-  
+
         <div className="form-group">
           <label>Post image</label>
           <input
@@ -107,5 +120,3 @@ export const EditBookForm = () => {
     </>
   );
 };
-
-

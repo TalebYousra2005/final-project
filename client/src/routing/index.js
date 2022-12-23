@@ -1,6 +1,6 @@
 import HomePage from "../pages";
 import ContactPage from "../pages/contact";
-import SigninSignupPage from "../pages/auth/signin.signup";
+import ignupPage from "../pages/auth/signup";
 import BooksPage from "../pages/books";
 import BookDetailsPage from "../pages/books/details";
 import { UserPageLayout } from "../components/layouts/user";
@@ -22,7 +22,7 @@ export const routes = [
   {
     id: 3,
     path: "auth/sign",
-    element: SigninSignupPage,
+    element: ignupPage,
     isPrivate: false,
     children: [],
   },

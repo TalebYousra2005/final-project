@@ -1,9 +1,9 @@
 import { HomeLayout } from "../../components/layouts/home";
 import { SignInForm } from "../../components/login";
 import { SignUpForm } from "../../components/register";
-import  cta  from "../../images/cta-bg.png";
+import cta from "../../images/cta-bg.png";
 
-const SigninSignupPage = () => {
+const SignupPage = () => {
   return (
     <HomeLayout>
       <div
@@ -11,9 +11,6 @@ const SigninSignupPage = () => {
         style={{ backgroundImage: `url(${cta})` }}
       >
         <div className="row align-items-center justify-content-center">
-          {/* <div className="col-md-5 signin">
-            <SignInForm />
-          </div> */}
           <div className="col-md-6 offset-md-3 signup">
             <SignUpForm />
           </div>
@@ -23,4 +20,4 @@ const SigninSignupPage = () => {
   );
 };
 
-export default SigninSignupPage;
+export default SignupPage;

@@ -14,5 +14,6 @@ module.exports = () => {
   router.get("/books", BooksController.getBooks);
   router.put("/books/edit/:id", checkLogin, BooksController.updateOneBook);
   router.delete("/books/delete/:id", checkLogin, BooksController.deleteOneBook);
+  router.get("/books/user/:id", checkLogin, BooksController.getBooksOfUser);
   return router;
 };

@@ -21,24 +21,25 @@ export const signin = (
     .then((res) => {
       if (res.status === 200) {
         const data = res.data.data;
+        // console.log(`this is data from signin ${data}`);
         // const id = data._id
-        localStorage.setItem("token", JSON.stringify(data));
+        localStorage.setItem("token", res.data.token);
         localStorage.setItem("id", data._id);
         // console.log(`hello${localStorage.setItem("token", JSON.stringify(data.token))}`)
         dispatch(signinUser(data));
         dispatch(addCurrentUser(data));
         successNotification(res.data.message);
         const id = data._id;
-        console.log(id);
+        // console.log(id);
 
         setTimeout(() => {
           window.location = `/user/${id}`;
         }, 3000);
       } else if (res.status === 404) {
-        console.log("res.message 404");
+        // console.log("res.message 404");
         errorNotification(res.data.message);
       } else if (res.status === 409) {
-        console.log("res.message 409");
+        // console.log("res.message 409");
         errorNotification(res.data.message);
       }
     })
@@ -51,7 +52,7 @@ export const signin = (
 
 // ! res.status(409) is not working
 export const signup = (
-  { firstName, lastName, userName, email, password, studyFeild },
+  { firstName, lastName, userName, email, password, contact, studyFeild },
   dispatch,
   successNotification,
   errorNotification
@@ -64,30 +65,32 @@ export const signup = (
       userName,
       email,
       password,
+      contact,
       studyFeild,
     })
     .then((res) => {
       // console.log(res);
       if (res.status === 201) {
         const data = res.data.data;
-        console.log(data);
+        // console.log(data);
         // const id = data._id
-        localStorage.setItem("token", JSON(data));
+        localStorage.setItem("token", JSON.stringify(data));
         // console.log(`hello${localStorage.setItem("token", JSON.stringify(data.token))}`)
         dispatch(signupUser({ data }));
         successNotification(res.data.message);
-        const id = data._id;
+
         setTimeout(() => {
-          window.location = `/user/${id}`;
+          window.location = `/`;
+          successNotification("please login to your account");
         }, 3000);
       } else if (res.status === 409) {
-        console.log("res.message 409");
+        // console.log("res.message 409");
         errorNotification(`gggg${res.data.message}`);
       }
     })
     .catch((err) => {
       // const data = res.data;
-      console.log(`${err}hello`);
+      // console.log(`${err}hello`);
       errorNotification(err.response.data.message);
     });
 };

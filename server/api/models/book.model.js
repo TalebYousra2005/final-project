@@ -1,4 +1,3 @@
-const User = require("./user.model");
 const mongoose = require("mongoose");
 /**
  * * the book must have
@@ -33,7 +32,7 @@ const bookSchema = new mongoose.Schema({
     type: String,
     default: "book",
   },
-  owner: {
+  ownerId: {
     type: String,
   },
   cloudinary_id: {

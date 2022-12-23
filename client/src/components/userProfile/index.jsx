@@ -7,33 +7,31 @@ import { useEffect } from "react";
 import useFetch from "../../hooks/useFetch";
 import { signupSchema } from "../../helper/form.validation";
 import { updateOneUser } from "../../services/user.service";
+import { useState } from "react";
 
 export const UserProfileForm = () => {
-  const user = useSelector((state) => state.user);
-  const { data, loading, error } = useFetch(`/users/${user._id}`);
+  const { currentUser } = useSelector((state) => state.user);
+
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(signupSchema) });
-
-  useEffect(() => {
-    let defaultValues = {};
-    defaultValues.title = data ? data.data.firstName : "";
-    defaultValues.author = data ? data.data.lastName : "";
-    defaultValues.price = data ? data.data.userName : "";
-    defaultValues.subject = data ? data.data.email : "";
-
-    reset({ ...defaultValues });
-  }, [data]);
   const dispatch = useDispatch();
   const handleFormSubmit = (data) => {
-    console.log(data);
-    // login
-    const { firstName, lastName, userName, studyFeild } = data;
+    const { firstName, lastName, userName, password, contact, studyFeild } =
+      data;
     updateOneUser(
-      { id: currentUser._id, firstName, lastName, userName, studyFeild },
+      {
+        id: currentUser._id,
+        firstName,
+        lastName,
+        userName,
+        password,
+        contact,
+        studyFeild,
+      },
       dispatch,
       successNotification,
       errorNotification
@@ -42,69 +40,98 @@ export const UserProfileForm = () => {
   return (
     <h1>
       <div className="container">
+        <p>
+          Welcome {currentUser.lastName}, here your account information, feel
+          free to update
+        </p>
         <div className="row col-md-10 offset-md-1">
-          <h5>
-            Welcome {user.lastName}, here your account information, feel free to
-            update
-          </h5>
           <form onSubmit={handleSubmit(handleFormSubmit)}>
-            <div className="form-group">
-              <label className="form-label">First name</label>
+            <div className="form-group firstName">
+              <label className="form-label fs-3">First name</label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control fs-4"
                 placeholder="Doe"
-                value={user.firstName}
+                value={currentUser.firstName}
                 {...register("firstName")}
               />
+              <h6 className="text-danger mt-2 fw-normal">
+                {errors.firstName?.message}
+              </h6>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Last name</label>
+            <div className="form-group latName">
+              <label className="form-label fs-3">Last name</label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control fs-4"
                 placeholder="John"
-                value={user.lastName}
+                value={currentUser.lastName}
                 {...register("lastName")}
               />
+              <h6 className="text-danger mt-2 fw-normal">
+                {errors.lastName?.message}
+              </h6>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Username</label>
+            <div className="form-group userName">
+              <label className="form-label fs-3">Username</label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control fs-4"
                 placeholder="userName"
-                value={user.userName}
+                value={currentUser.userName}
                 {...register("userName")}
               />
+              <h6 className="text-danger mt-2 fw-normal">
+                {errors.userName?.message}
+              </h6>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Email</label>
+            <div className="form-group email">
+              <label className="form-label fs-3">Email</label>
               <input
                 type="email"
-                className="form-control"
+                className="form-control fs-4"
                 placeholder="you@example.com"
-                value={user.email}
+                value={currentUser.email}
                 {...register("email")}
               />
+              <h6 className="text-danger mt-2 fw-normal">
+                {errors.email?.message}
+              </h6>
             </div>
 
-            <div className="form-group">
-              <label className="form-label">Password</label>
+            <div className="form-group email">
+              <label className="form-label fs-3">Phon number</label>
+              <input
+                type="number"
+                className="form-control fs-4"
+                placeholder="+213 0. .. .. .. .."
+                value={currentUser.contact}
+                {...register("contact")}
+              />
+              <h6 className="text-danger mt-2 fw-normal">
+                {errors.contat?.message}
+              </h6>
+            </div>
+
+            <div className="form-group password">
+              <label className="form-label fs-3">Password</label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control fs-4"
                 placeholder="your current password"
               />
               <input
                 type="text"
-                className="form-control mt-3"
+                className="form-control fs-4 mt-3"
                 placeholder="your new password"
                 {...register("password")}
               />
+              <h6 className="text-danger mt-2 fw-normal">
+                {errors.password?.message}
+              </h6>
             </div>
             <button className="btn btn-warning">Save changes</button>
           </form>

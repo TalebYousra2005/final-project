@@ -2,15 +2,27 @@ import useFetch from "../../../hooks/useFetch";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { ErrorFetch } from "../../../components/error-fetch";
-import { useEffect } from "react";
-const UserBooksPage = () => {
-  const params = useParams();
+import { useEffect, useState } from "react";
+import { formatDate } from "../../../helper/formateDate";
+import httpCommun from "../../../http.commun";
 
+const UserBooksPage = () => {
+  const [books, setBooks] = useState(null);
+  const params = useParams();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
-  const { data, loading, error } = useFetch(`/users/${params.id}`);
+  useEffect(() => {
+    httpCommun
+      .get(`/books/user/${currentUser._id}`)
+      .then((res) => {
+        if (res.status === 200) {
+          setBooks(res.data.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
-  // console.log(data);
+  console.log(books);
   return (
     <div className="container-fluid">
       <h2>My books</h2>
@@ -26,8 +38,8 @@ const UserBooksPage = () => {
       </div>
       <div className="data-container mt-5">
         {/* {loading && <Loading />} */}
-        {error && <ErrorFetch message="Error while fetchin contacts " />}
-        {!error && !loading && data && (
+        {/* {error && <ErrorFetch message="Error while fetchin contacts " />} */}
+        {books && (
           <table className="table table-bordered">
             <thead>
               <tr>
@@ -38,8 +50,8 @@ const UserBooksPage = () => {
               </tr>
             </thead>
             <tbody>
-              {/* {data &&
-                data.data.map((item) => {
+              {books &&
+                books.map((item) => {
                   return (
                     <tr key={item._id}>
                       <td>{item.title}</td>
@@ -55,14 +67,14 @@ const UserBooksPage = () => {
                         /
                         <a
                           className="btn btn-success"
-                          href={`/user/${params.id}books/edit/${item._id}`}
+                          href={`/user/${params.id}/books/edit/${item._id}`}
                         >
                           v
                         </a>
                       </td>
                     </tr>
                   );
-                })} */}
+                })}
             </tbody>
           </table>
         )}

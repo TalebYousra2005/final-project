@@ -1,8 +1,19 @@
-/* .card{
- border:  var(--secondary-color)!important;
-} */
-.img-fluid{
-    /* width: 230px!important; */
-    height: 100%!important;
-    text-align: center;
+.product-card {
+  border: 2px solid var(--secondary-color) !important;
+  padding: 10px !important;
+  margin: 20px 20px!important;
+  /* background-color: var(--base-color)!important; */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.product-card:hover{
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 40px 80px!important;
+}
+.img-fluid {
+  /* width: 230px!important; */
+  height: 100% !important;
+  text-align: center;
+  
+}
+.card-content-container {
+  padding: 10px !important;
 }

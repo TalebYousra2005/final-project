@@ -1,30 +1,42 @@
 import useFetch from "../../hooks/useFetch";
 import { ProductCard } from "../../components/product-card/index";
 import { HomeLayout } from "../../components/layouts/home";
+import { useState, useEffect } from "react";
+import httpCommun from "../../http.commun";
 import { ErrorFetch } from "../../components/error-fetch";
 import "./style.css";
 const BooksPage = () => {
-  const { data, loading, error } = useFetch("/books");
+  const [books, setBooks] = useState(null);
+
+  useEffect(() => {
+    httpCommun
+      .get(`/books`)
+      .then((res) => {
+        if (res.status === 200) {
+          setBooks(res.data.data);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
   // console.log(data)
   return (
     <HomeLayout>
       <div className="container-fluid  product-container mt-3">
         <div className="row p-4">
-          <div className="col-md-3 sideBar-container">
+          {/* <div className="col-md-3 sideBar-container">
             <div className="sideBar"></div>
-          </div>
+          </div> */}
 
-          <div className="col-md-9 content-area">
+          <div className="col-md-12 content-area">
             <h1 className="text-center">Our Books</h1>
             <div className="grid-container row mt-5 p-4">
               {/* {loading && <Loading />} */}
-              {error && (
+              {/* {error && (
                 <ErrorFetch message="error while fetching books list" />
-              )}
-              {data && data.length === 0 && <h1>Not data to show</h1>}
-              {!error &&
-                data &&
-                data.data.map((el) => {
+              )} */}
+              {books && books.length === 0 && <h1>Not data to show</h1>}
+              {books &&
+                books.map((el) => {
                   return (
                     <div className="g-col-md-4" key={el._id}>
                       <ProductCard item={el} />

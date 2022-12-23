@@ -4,6 +4,8 @@
 
 .active {
   background-color: var(--primary-color);
+  border-bottom: 2px solid var(--secondary-color);
+  margin: 0px;
 }
 
 .sidebar-links p {

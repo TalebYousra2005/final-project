@@ -10,12 +10,16 @@ export const updateOneUser = ({
   firstName,
   lastName,
   userName,
+  password,
+  contact,
   studyFeild,
 }) => {
   let formData = new FormData();
   formData.append("firstName", firstName);
   formData.append("lastName", lastName);
   formData.append("userName", userName);
+  formData.append("password",password );
+  formData.append("contact",contact );
   formData.append("studyFeild", studyFeild);
   // formData.append("image", image ? image[0] : null);
   http

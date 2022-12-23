@@ -3,18 +3,15 @@ import { Compare } from "../../helper/compareUrl";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import "./style.css";
-import currentUser from "../../redux/reducers/currentUser";
+
 export const Navbar = () => {
   const navigate = useNavigate();
   const par = useParams();
-  console.log(par);
+  // console.log(par);
   const id = localStorage.getItem("id");
-  console.log(`this is the params ${id}`);
+  // console.log(`this is the params ${id}`);
   const { currentUser } = useSelector((state) => state.user);
-  // console.log(currentUser);
-  // !const dispatch = useDispatch();
-  // !const currentUser = dispatch(currentUser);
-  // !console.log(currentUser)
+  // console.log(`this is me, the current user : HELLO!!! ${currentUser}`);
   const path = useLocation();
   return (
     <nav className="navbar navbar-expand-lg sticky-top p-0 px-3 px-lg-5">
@@ -108,7 +105,7 @@ export const Navbar = () => {
               }
             >
               <Link to="/auth/sign" className="nav-item nav-link">
-                Sign in/up
+                Sign up
               </Link>
             </p>
           )}

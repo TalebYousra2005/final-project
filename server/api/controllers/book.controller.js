@@ -36,7 +36,7 @@ exports.addOneBook = async (req, res) => {
     // ! the link for the post image is "http://localhost:4000/uploads/name"
     const { title, author, pages, price, ownerId } = req.body;
     // console.log(ownerId);
-     // console.log(req.body);
+    // console.log(req.body);
     // saving image to cloudinary
     const result = await cloudinary.uploader.upload(req.file.path);
     const book = new Book({
@@ -54,7 +54,9 @@ exports.addOneBook = async (req, res) => {
       .status(201)
       .send({ message: "book created with success", data: savedBook });
   } catch (err) {
-    res.status(500).send(err.message);
+    res
+      .status(err.status || 500)
+      .send(err.message || "something went wrong while adding a book");
   }
 };
 
@@ -104,7 +106,7 @@ exports.updateOneBook = async (req, res) => {
 
 exports.deleteOneBook = async (req, res) => {
   try {
-    console.log(req.params.id);
+    // console.log(req.params.id);
     const book = await Book.findById(req.params.id);
     if (!book) {
       return res.status(404).send("book not found");
@@ -115,5 +117,19 @@ exports.deleteOneBook = async (req, res) => {
     res.status(200).send("Book deleted");
   } catch (err) {
     res.status(err.status || 500).send(err.message || "something went wrong");
+  }
+};
+
+exports.getBooksOfUser = async (req, res) => {
+  try {
+    const books = await Book.find({ ownerId: req.params.id });
+    if (!books) {
+      return res.status(404).send({ message: "You have no books" });
+    }
+    res
+      .status(200)
+      .send({ message: "books retreived successfully", data: books });
+  } catch (err) {
+    res.status(err.message || 500).send(err.message || "message");
   }
 };

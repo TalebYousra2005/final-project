@@ -4,7 +4,7 @@ import { format, render, cancel, register } from "timeago.js";
 import { useNavigate } from "react-router-dom";
 export const ProductCard = ({ item }) => {
   const navigate = useNavigate();
-  const { _id, type, title, author, price, subject, image, createdAt } = item;
+  const { _id, type, title, author, price, subject, image,ownerId, createdAt } = item;
   // console.log(item)
   return (
     <>
@@ -34,6 +34,35 @@ export const ProductCard = ({ item }) => {
       </div> */}
 
       <div
+        className="product-card"
+        style={{ width: "20rem" }}
+        onClick={() => {
+          if (type === "book") {
+            navigate(`/books/${_id}`);
+          } else if (type === "cours") {
+            navigate(`/courses/${_id}`);
+          }
+        }}
+      >
+        <img src={image} className="img-fluid" />
+        <div className="text-container">
+          <h3 className="card-title">{title}</h3>
+          <div className="card-body">
+            <p className="card-text">
+              Price : {price} DA
+              <br />
+              Subject : {subject}
+              <br />
+              {author && <p className="card-text"> Author : {author}</p>}
+            </p>
+
+            <p className="text-muted card-text">{format(createdAt)}</p>
+          </div>
+          {/* <button className="btn">see openings</button> */}
+        </div>
+      </div>
+
+      {/* <div
         className="card"
         style={{ width: "18rem" }}
         onClick={() => {
@@ -45,22 +74,21 @@ export const ProductCard = ({ item }) => {
         }}
       >
         <img src={image} className="card-img-top" alt="..." />
-        <h5 className="card-title">{title}</h5>
-        <div className="card-body">
-          <p className="card-text">
-            Price : {price} DA
-            <br />
-            Subject : {subject}
-            <br />
-            {author && <p className="card-text">Author : {author}</p>}
-          </p>
-          <p className="card-text">
-            <p className="text-muted">
-              {format(createdAt)}
+        <div className="card-content-container">
+          <h5 className="card-title">{title}</h5>
+          <div className="card-body">
+            <p className="card-text">
+              Price : {price} DA
+              <br />
+              Subject : {subject}
+              <br />
+              {author && <p className="card-text">Author : {author}</p>}
             </p>
-          </p>
+
+            <p className="text-muted card-text">{format(createdAt)}</p>
+          </div>
         </div>
-      </div>
+      </div> */}
 
       {/* <div
         className="card mb-3"

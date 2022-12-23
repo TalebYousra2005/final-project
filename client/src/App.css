@@ -13,7 +13,7 @@ body {
 h1 {
   color: var(--secondary-color);
 }
-/* * styling the login/register page*/
+/* * styling the register page*/
 .form-container {
   background-repeat: no-repeat;
   background-size: 90% 100%;
@@ -58,6 +58,11 @@ textarea {
 }
 .email,
 .message {
+  border: 2px solid var(--secondary-color) !important;
+  border-radius: 20%;
+  background-color: var(--base-color)!important;
+}
+input{
   border: 2px solid var(--secondary-color) !important;
   border-radius: 20%;
   background-color: var(--base-color)!important;

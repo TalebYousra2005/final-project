@@ -18,6 +18,7 @@ export const signupSchema = yup.object({
     .string()
     .min(8, "Password is too short - should be 8 chars minimus")
     .required("no password provided"),
+  contact: yup.number(),
   studyFeild: yup.string().required("choose your study feild"),
 });
 
