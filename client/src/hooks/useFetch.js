@@ -11,12 +11,10 @@ const useFetch = (url) => {
       .then((jsonData) => {
         setData(jsonData);
         setLoading(false);
-        console.log(`this is from fetch ${data}`);
       })
       .catch((err) => {
         setError(err);
         setLoading(false);
-        console.log(err);
       });
   }, []);
 

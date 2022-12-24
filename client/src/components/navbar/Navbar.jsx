@@ -1,17 +1,11 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Compare } from "../../helper/compareUrl";
 import { useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import "./style.css";
 
 export const Navbar = () => {
-  const navigate = useNavigate();
-  const par = useParams();
-  // console.log(par);
-  const id = localStorage.getItem("id");
-  // console.log(`this is the params ${id}`);
   const { currentUser } = useSelector((state) => state.user);
-  // console.log(`this is me, the current user : HELLO!!! ${currentUser}`);
   const path = useLocation();
   return (
     <nav className="navbar navbar-expand-lg sticky-top p-0 px-3 px-lg-5">

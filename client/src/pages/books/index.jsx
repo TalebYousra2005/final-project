@@ -18,7 +18,7 @@ const BooksPage = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-  // console.log(data)
+ 
   return (
     <HomeLayout>
       <div className="container-fluid  product-container mt-3">

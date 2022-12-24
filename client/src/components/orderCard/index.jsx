@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import httpCommun from "../../http.commun";
 import { formatDate } from "../../helper/formateDate";
-
+import { deleteOneOrder } from "../../services/order.service";
+import "./style.css"
 export const OrderCard = ({ productId, clientId, orderId }) => {
   const [client, setClient] = useState(null);
   const [product, setProduct] = useState(null);
@@ -40,7 +41,7 @@ export const OrderCard = ({ productId, clientId, orderId }) => {
       .catch((err) => console.log(err.message));
   }, []);
   return (
-    <div className="order-card" style={{ width: "20rem" }}>
+    <div className="order-card p-4" style={{ width: "20rem" }}>
       <div className="text-container">
         <h3 className="card-title">Order</h3>
         <div className="card-body">
@@ -53,6 +54,14 @@ export const OrderCard = ({ productId, clientId, orderId }) => {
           Email : {client?.email}
           <br />
           Phone number : {client?.contact}
+          <button
+            className="btn btn-danger del-order"
+            onClick={() => {
+              deleteOneOrder();
+            }}
+          >
+            <span className="material-symbols-outlined">delete</span>
+          </button>
         </div>
       </div>
     </div>

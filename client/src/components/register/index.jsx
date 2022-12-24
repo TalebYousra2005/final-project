@@ -18,8 +18,7 @@ export const SignUpForm = () => {
   } = useForm({ resolver: yupResolver(signupSchema) });
   const dispatch = useDispatch();
   const handleFormSubmit = (data) => {
-    // console.log(data);
-    // login
+
     const {
       firstName,
       lastName,

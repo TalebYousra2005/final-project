@@ -22,7 +22,7 @@ const UserBooksPage = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  console.log(books);
+  
   return (
     <div className="container-fluid">
       <h1 className="text-center">My books</h1>

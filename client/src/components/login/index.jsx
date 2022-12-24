@@ -17,8 +17,6 @@ export const SignInForm = () => {
   } = useForm({ resolver: yupResolver(signinSchema) });
   const dispatch = useDispatch();
   const handleFormSubmit = (data) => {
-    // console.log(data);
-    // login
     const { email, password } = data;
     signin(
       { email, password },

@@ -22,8 +22,7 @@ export const AddDocumentForm = () => {
   } = useForm({ resolver: yupResolver(DocumentSchema) });
   const dispatch = useDispatch();
   const handleFormSubmit = (data) => {
-    // console.log(data);
-    // login
+    
     const { title, price, subject, image } = data;
     addOneDocument(
       { title, price, subject, image, ownerId: currentUser._id },

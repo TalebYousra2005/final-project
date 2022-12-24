@@ -22,8 +22,7 @@ export const UserProfileForm = () => {
       }
     });
   });
-  // console.log(user)
-  
+
   const {
     register,
     handleSubmit,
@@ -61,7 +60,7 @@ export const UserProfileForm = () => {
   return (
     <div className="container">
       <h3>
-        Welcome {user?.lastName}, here your account information, feel free to
+        Welcome {user?.userName}, here your account information, feel free to
         update
       </h3>
       <div className="row ">

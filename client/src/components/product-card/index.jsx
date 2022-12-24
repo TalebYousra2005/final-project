@@ -2,134 +2,61 @@
 import "./style.css";
 import { format, render, cancel, register } from "timeago.js";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import httpCommun from "../../http.commun";
+import { setUseProxies } from "immer";
+import { useState } from "react";
 export const ProductCard = ({ item }) => {
   const navigate = useNavigate();
-  const { _id, type, title, author, price, subject, image,ownerId, createdAt } = item;
-  // console.log(item)
+  const [user, setUser] = useState(null);
+  const {
+    _id,
+    type,
+    title,
+    author,
+    price,
+    subject,
+    image,
+    ownerId,
+    createdAt,
+  } = item;
+
+  useEffect(() => {
+    httpCommun.get(`users/${ownerId}`).then((res) => {
+      if (res.status === 200) {
+        setUser(res.data?.data);
+      }
+    });
+  });
   return (
-    <>
-      {/* <div
-        className="card m-2 "
-        style={{ height: "35rem" }}
-        onClick={() => {
-          if (type === "book") {
-            navigate(`/books/${_id}`);
-          } else if (type === "cours") {
-            navigate(`/courses/${_id}`);
-          }
-        }}
-      >
+    <div
+      className="product-card"
+      style={{ width: "20rem" }}
+      onClick={() => {
+        if (type === "book") {
+          navigate(`/books/${_id}`);
+        } else if (type === "cours") {
+          navigate(`/courses/${_id}`);
+        }
+      }}
+    >
+      <img src={image} className="img-fluid" />
+      <div className="text-container">
+        <h3 className="card-title">{title}</h3>
         <div className="card-body">
-          <img
-            src={image}
-            alt="product-image"
-            height={"60%"}
-            className="card-img mb-2"
-          />
-          <h3 className="card-title">{title}</h3>
-          <p className="card-text">{price}</p>
-          <p className="card-text">{subject}</p>
-          {author && <p className="card-text">{author}</p>}
-        </div>
-      </div> */}
+          <p className="card-text">
+            Price : {price} DA
+            <br />
+            Subject : {subject}
+            <br />
+            {author && <p className="card-text"> Author : {author}</p>}
+            <br />
+            By : {user?.userName}
+          </p>
 
-      <div
-        className="product-card"
-        style={{ width: "20rem" }}
-        onClick={() => {
-          if (type === "book") {
-            navigate(`/books/${_id}`);
-          } else if (type === "cours") {
-            navigate(`/courses/${_id}`);
-          }
-        }}
-      >
-        <img src={image} className="img-fluid" />
-        <div className="text-container">
-          <h3 className="card-title">{title}</h3>
-          <div className="card-body">
-            <p className="card-text">
-              Price : {price} DA
-              <br />
-              Subject : {subject}
-              <br />
-              {author && <p className="card-text"> Author : {author}</p>}
-            </p>
-
-            <p className="text-muted card-text">{format(createdAt)}</p>
-          </div>
-          {/* <button className="btn">see openings</button> */}
+          <p className="text-muted card-text">{format(createdAt)}</p>
         </div>
       </div>
-
-      {/* <div
-        className="card"
-        style={{ width: "18rem" }}
-        onClick={() => {
-          if (type === "book") {
-            navigate(`/books/${_id}`);
-          } else if (type === "cours") {
-            navigate(`/courses/${_id}`);
-          }
-        }}
-      >
-        <img src={image} className="card-img-top" alt="..." />
-        <div className="card-content-container">
-          <h5 className="card-title">{title}</h5>
-          <div className="card-body">
-            <p className="card-text">
-              Price : {price} DA
-              <br />
-              Subject : {subject}
-              <br />
-              {author && <p className="card-text">Author : {author}</p>}
-            </p>
-
-            <p className="text-muted card-text">{format(createdAt)}</p>
-          </div>
-        </div>
-      </div> */}
-
-      {/* <div
-        className="card mb-3"
-        style={{ height: "300px" }}
-        onClick={() => {
-          if (type === "book") {
-            navigate(`/books/${_id}`);
-          } else if (type === "cours") {
-            navigate(`/courses/${_id}`);
-          }
-        }}
-      >
-        <div className="row g-0">
-          <div className="col-md-4">
-            <img
-              src={image}
-              className="img-fluid rounded-start"
-              alt="..."
-              //  height={"100%"}
-              style={{ height: " 100%" }}
-            />
-          </div>
-          <div className="col-md-8">
-            <div className="card-body">
-              <h5 className="card-title">{title}</h5>
-              <p className="card-text">
-                Price : {price} DA
-                <br />
-                Subject : {subject}
-                <br />
-                {author && <p className="card-text">Author : {author}</p>}
-              </p>
-              <p className="card-text">
-                <small className="text-muted">
-                  {format(Date.now() - createdAt)}
-                </small>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div> */}
-    </>
+    </div>
   );
 };

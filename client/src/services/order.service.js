@@ -16,3 +16,14 @@ export const addOrder = (productId, clientId, sellerId) => {
       errorNotification(err.message);
     });
 };
+
+export const deleteOneOrder = (id) => {
+  http.delete(`/orders/delete/${id}`).then((res) => {
+    if (res.status === 200) {
+      successNotification("order deleted successfully");
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
+    }
+  });
+};

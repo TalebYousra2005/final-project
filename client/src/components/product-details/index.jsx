@@ -17,7 +17,6 @@ export const ProductDetails = ({ item }) => {
       })
       .catch((err) => console.log(err));
   }, []);
-  // console.log(user)
 
   return (
     <div className="container">

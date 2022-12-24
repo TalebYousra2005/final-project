@@ -13,7 +13,7 @@ const UserDocumentsPage = () => {
 
   useEffect(() => {
     httpCommun
-      .get(`/documents/user/${currentUser._id}`)
+      .get(`/documents/user/${params.id}`)
       .then((res) => {
         if (res.status === 200) {
           setDocuments(res.data.data);
@@ -22,7 +22,7 @@ const UserDocumentsPage = () => {
       .catch((err) => console.log(err));
   }, []);
 
-//   console.log(documents);
+
   return (
     <div className="container-fluid">
       <h1 className="text-center">My Documents</h1>

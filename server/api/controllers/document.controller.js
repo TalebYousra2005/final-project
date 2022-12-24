@@ -103,7 +103,6 @@ exports.updateOneDocument = async (req, res) => {
 
 exports.deleteOneDocument = async (req, res) => {
   try {
-    // console.log(req.params.id);
     const document = await Document.findById(req.params.id);
     if (!document) {
       return res.status(404).send("document not found");

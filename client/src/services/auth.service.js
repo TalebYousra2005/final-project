@@ -21,16 +21,13 @@ export const signin = (
     .then((res) => {
       if (res.status === 200) {
         const data = res.data.data;
-        // console.log(`this is data from signin ${data}`);
-        // const id = data._id
+
         localStorage.setItem("token", res.data.token);
         localStorage.setItem("id", data._id);
-        // console.log(`hello${localStorage.setItem("token", JSON.stringify(data.token))}`)
         dispatch(signinUser(data));
         dispatch(addCurrentUser(data));
         successNotification(res.data.message);
         const id = data._id;
-        // console.log(id);
 
         setTimeout(() => {
           window.location = `/user/${id}`;
@@ -38,8 +35,6 @@ export const signin = (
       }
     })
     .catch((err) => {
-      // const data = res.data;
-      // console.log(err.response);
       errorNotification(err.response?.data.message);
     });
 };
@@ -63,13 +58,8 @@ export const signup = (
       studyFeild,
     })
     .then((res) => {
-      // console.log(res);
       if (res.status === 201) {
         const data = res.data.data;
-        // console.log(data);
-        // const id = data._id
-        // localStorage.setItem("token", JSON.stringify(data));
-        // console.log(`hello${localStorage.setItem("token", JSON.stringify(data.token))}`)
         dispatch(signupUser({ data }));
         successNotification(res.data.message);
 
@@ -80,8 +70,6 @@ export const signup = (
       } 
     })
     .catch((err) => {
-      // const data = res.data;
-      // console.log(`${err}hello`);
       errorNotification(err.response?.data.message);
     });
 };

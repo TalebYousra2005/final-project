@@ -13,8 +13,6 @@ export const addOneBook = ({
   image,
   ownerId,
 }) => {
-  // const token = localStorage.getItem("token");
-  // send our data as form ddta
   var formData = new FormData();
   formData.append("title", title);
   formData.append("author", author);
@@ -60,7 +58,7 @@ export const updateOneBook = ({
   formData.append("ownerId", ownerId);
   formData.append("image", image ? image[0] : null);
   http
-    .put(`/books/${id}`, formData, {
+    .put(`/books/edit/${id}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
       },
@@ -71,6 +69,7 @@ export const updateOneBook = ({
         setTimeout(() => {
           window.location = `/user/${ownerId}/books`;
         }, 3000);
+
       }
     })
     .catch((err) => {
@@ -80,12 +79,12 @@ export const updateOneBook = ({
 };
 
 export const deleteOneBook = (id) => {
-  http.delete(`/books/${id}`).then((res) => {
+  http.delete(`/books/delete/${id}`).then((res) => {
     if (res.status === 200) {
       successNotification("book deleted successfully");
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 3000);
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     }
-  });
+  }).catch((err)=>{errorNotification(err.message)})
 };

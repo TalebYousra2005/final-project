@@ -25,7 +25,7 @@ export const addOneDocument = ({ title, price, subject, image, ownerId }) => {
           window.location = `/user/${ownerId}/documents`;
         }, 3000);
       } else if (res.status === 403) {
-        return errorNotification("Please signin for this action");
+        return errorNotification({message:"Please signin for this action"});
       }
     })
     .catch((err) => {

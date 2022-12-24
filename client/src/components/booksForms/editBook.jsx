@@ -29,7 +29,6 @@ export const EditBookForm = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(book);
   const {
     register,
     handleSubmit,

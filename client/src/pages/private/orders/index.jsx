@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import httpCommun from "../../../http.commun";
 import { OrderCard } from "../../../components/orderCard";
-
+import "./style.css"
 const UserOrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const params = useParams();
@@ -21,14 +21,15 @@ const UserOrdersPage = () => {
       .catch((err) => console.log(err.message));
   }, []);
 
-  console.log(orders);
+ 
 
   return (
     <div className="container mt-3">
       <div className="row p-4">
-        <div className="col-md-12 content-area">
+        <div className="col-md-10 content-area">
           <h1 className="text-center">My orders</h1>
-          <div className="grid-container row mt-5 p-4">
+          
+          <div className="grid row mt-5 p-4">
             {orders && orders.length === 0 && <h1>Not data to show</h1>}
             {orders &&
               orders.map((el) => {

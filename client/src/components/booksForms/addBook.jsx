@@ -23,8 +23,6 @@ export const AddBookForm = () => {
   } = useForm({ resolver: yupResolver(BookSchema) });
   const dispatch = useDispatch();
   const handleFormSubmit = (data) => {
-    // console.log(data);
-    // login
     const { title, author,price, subject, image } = data;
     addOneBook(
       { title, author, price, subject, image, ownerId: currentUser._id },
