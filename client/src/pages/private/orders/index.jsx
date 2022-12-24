@@ -5,7 +5,7 @@ import httpCommun from "../../../http.commun";
 import { OrderCard } from "../../../components/orderCard";
 
 const UserOrdersPage = () => {
-  const [orders, setOrders] = useState(null);
+  const [orders, setOrders] = useState([]);
   const params = useParams();
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
@@ -18,7 +18,7 @@ const UserOrdersPage = () => {
           setOrders(res.data.data);
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err.message));
   }, []);
 
   console.log(orders);

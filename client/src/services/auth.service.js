@@ -68,15 +68,15 @@ export const signup = (
         const data = res.data.data;
         // console.log(data);
         // const id = data._id
-        localStorage.setItem("token", JSON.stringify(data));
+        // localStorage.setItem("token", JSON.stringify(data));
         // console.log(`hello${localStorage.setItem("token", JSON.stringify(data.token))}`)
         dispatch(signupUser({ data }));
         successNotification(res.data.message);
 
         setTimeout(() => {
           window.location = `/`;
-          successNotification("please login to your account");
         }, 3000);
+        successNotification("please login to your account");
       } 
     })
     .catch((err) => {

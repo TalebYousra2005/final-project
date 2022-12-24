@@ -6,8 +6,6 @@ import {
 } from "../helper/notifications";
 
 export const addOneDocument = ({ title, price, subject, image, ownerId }) => {
-  // const token = localStorage.getItem("token");
-  // send our data as form ddta
   var formData = new FormData();
   formData.append("title", title);
   formData.append("price", price);
@@ -31,7 +29,7 @@ export const addOneDocument = ({ title, price, subject, image, ownerId }) => {
       }
     })
     .catch((err) => {
-      errorNotification(err.message);
+      errorNotification({ message: err.message });
     });
 };
 
@@ -43,14 +41,15 @@ export const updateOneDocument = ({
   image,
   ownerId,
 }) => {
-  let formData = new FormData();
+  var formData = new FormData();
   formData.append("title", title);
   formData.append("price", price);
   formData.append("subject", subject);
-  formData.append("image", image ? image[0] : null);
+  formData.append("image", image[0]);
+  formData.append("ownerId", ownerId);
   http
     .put(`/documents/${id}`, formData, {
-      headers: {
+      header: {
         "Content-Type": "multipart/form-data",
       },
     })

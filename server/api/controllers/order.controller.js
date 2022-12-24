@@ -32,13 +32,17 @@ exports.getOrders = async (req, res) => {
 
 exports.getSellerOrders = async (req, res) => {
   try {
-    const userOrders = Order.find({ sellerId: req.user.user_id });
+    const userOrders = await Order.find({ sellerId: req.user.user_id });
+    console.log(userOrders)
+    if (!userOrders) {
+      return res.status(404).send({ message: "no orders" });
+    }
     res
       .status(200)
       .send({ message: "orders retreived successfuly", data: userOrders });
   } catch (err) {
     res
-      .status(500 || err.status)
+      .status(err.status || 500)
       .send(err.message || "something went wrong while gitting user orders");
   }
 };

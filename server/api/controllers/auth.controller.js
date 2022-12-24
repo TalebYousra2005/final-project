@@ -31,7 +31,9 @@ exports.signup = async (req, res) => {
     //* checking if the user exists
     const oldUser = await User.findOne({ email });
     if (oldUser) {
-      return res.status(409).send("User already exists, please login");
+      return res
+        .status(409)
+        .send({ message: "User already exists, please login" });
     }
 
     //*hashing password
@@ -63,7 +65,7 @@ exports.signin = async (req, res) => {
     const { email, password } = req.body;
     //*server form validation
     if (!(email && password)) {
-      return res.status(400).send("All inputs are required");
+      return res.status(400).send({ message: "All inputs are required" });
     }
 
     //* search for user in db
@@ -83,8 +85,10 @@ exports.signin = async (req, res) => {
     }
   } catch (err) {
     res
-      .status( 500)
-      .send(err.message || "something went wrong while signing in ");
+      .status(500)
+      .send({
+        message: err.message || "something went wrong while signing in ",
+      });
   }
 };
 

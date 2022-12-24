@@ -43,7 +43,15 @@ export const addOneBook = ({
     });
 };
 
-export const updateOneBook = ({ id, title, author, price, subject, image,ownerId }) => {
+export const updateOneBook = ({
+  id,
+  title,
+  author,
+  price,
+  subject,
+  image,
+  ownerId,
+}) => {
   let formData = new FormData();
   formData.append("title", title);
   formData.append("author", author);
@@ -60,9 +68,9 @@ export const updateOneBook = ({ id, title, author, price, subject, image,ownerId
     .then((res) => {
       if (res.status === 200) {
         successNotification("Book updated successfully");
-        // setTimeout(() => {
-        //   window.location = "/admin/posts";
-        // }, 3000);
+        setTimeout(() => {
+          window.location = `/user/${ownerId}/books`;
+        }, 3000);
       }
     })
     .catch((err) => {

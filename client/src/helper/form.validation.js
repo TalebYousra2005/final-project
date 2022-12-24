@@ -35,3 +35,10 @@ export const BookSchema = yup.object({
   //   .required("no password provided"),
   // studyFeild: yup.string().required("choose your study feild"),
 });
+
+export const DocumentSchema = yup.object({
+  title: yup.string().required("Please enter a title"),
+  price: yup.number().required("please set a price, it must be a number"),
+  subject: yup.string().required("precise a subject for your book please"),
+  image: yup.mixed().required("File is required"),
+});

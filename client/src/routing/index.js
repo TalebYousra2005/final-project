@@ -11,6 +11,8 @@ import UserBooksPage from "../pages/private/books";
 import NotFoundPage from "../pages/404.jsx";
 import UserOrdersPage from "../pages/private/orders";
 import DocumentsPage from "../pages/documents";
+import UserDocumentsPage from "../pages/private/documents";
+import AddDocumentPage from "../pages/private/documents/addDocument";
 
 export const routes = [
   { id: 1, path: "/", element: HomePage, isPrivate: false, children: [] },
@@ -66,7 +68,9 @@ export const routes = [
       { id: 2, path: "books", element: UserBooksPage },
       { id: 3, path: "books/create", element: AddBookPage },
       { id: 4, path: "books/edit/:id", element: EditBookPage },
-      { id: 5, path: "orders", element: UserOrdersPage },
+      { id: 5, path: "documents", element: UserDocumentsPage },
+      { id: 6, path: "documents/create", element: AddDocumentPage },
+      { id: 9, path: "orders", element: UserOrdersPage },
     ],
   },
   {

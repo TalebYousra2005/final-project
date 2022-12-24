@@ -37,9 +37,6 @@ const UserDocumentsPage = () => {
         </div>
       </div>
       <div className="data-container mt-5">
-        {/* {loading && <Loading />} */}
-        {/* {error && <ErrorFetch message="Error while fetchin contacts " />} */}
-
         {documents && (
           <table className="table table-bordered table-hover border-4 rounded">
             <thead>
@@ -65,7 +62,7 @@ const UserDocumentsPage = () => {
                       <td>
                         <button
                           className="btn btn-danger mx-2"
-                          onClick={() => deleteOneBook(item._id)}
+                          onClick={() => deleteOneDocument(item._id)}
                         >
                           {/* <FontAwesomeIcon icon="fa-duotone fa-trash-can-list" /> */}
                           <span className="material-symbols-outlined">

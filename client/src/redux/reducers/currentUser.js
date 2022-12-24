@@ -7,10 +7,10 @@ const currentUserSlice = createSlice({
   },
   reducers: {
     addCurrentUser: (state, { payload }) => {
-      state.currentUser=payload;
+      state.currentUser = payload;
     },
     removeCurrentUser: (state) => {
-      state.currentUser=null
+      state.currentUser = null;
     },
   },
 });

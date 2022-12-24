@@ -23,6 +23,13 @@ export const UserProfileForm = () => {
     });
   });
   // console.log(user)
+  
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(signupSchema) });
   useEffect(() => {
     let defaultValues = {};
     defaultValues.firstName = user ? user.firstName : "";
@@ -34,13 +41,6 @@ export const UserProfileForm = () => {
 
     reset({ ...defaultValues });
   }, []);
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(signupSchema) });
 
   const dispatch = useDispatch();
 
